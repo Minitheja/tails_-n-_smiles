@@ -333,7 +333,7 @@ function App() {
     <div className="min-h-screen bg-[#FFF9F0] text-[#1D2A44] relative selection:bg-[#FFC83D] selection:text-[#1D2A44]">
       
       {/* GLASS NAVIGATION BAR */}
-      <nav className="fixed top-0 left-0 right-0 z-50 glass-nav">
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-[#FFF9F0] border-b border-[#1D2A44]/5 md:bg-[#FFF9F0]/75 md:backdrop-blur-md">
         <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
           
           {/* Logo */}
