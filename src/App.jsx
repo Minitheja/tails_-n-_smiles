@@ -391,8 +391,7 @@ function App() {
         </AnimatePresence>
       </nav>
 
-      {/* HERO SECTION */}
-      <header id="hero" className="pt-32 pb-24 md:pt-40 md:pb-32 px-6 overflow-hidden">
+      <header id="hero" className="pt-20 pb-16 md:pt-28 md:pb-20 px-6 overflow-hidden">
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
           
           {/* Left Hero Content */}
@@ -400,7 +399,7 @@ function App() {
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
-            className="lg:col-span-7 space-y-8"
+            className="lg:col-span-7 space-y-4"
           >
             {/* Launching Soon Badge */}
             <div className="inline-flex items-center gap-2 bg-[#FFC83D]/15 text-[#FF7A00] font-bold px-4 py-2 rounded-full border border-[#FFC83D]/25 shadow-soft-sm">
@@ -419,13 +418,15 @@ function App() {
               Everything your pet needs, <strong className="text-[#1D2A44] font-semibold">all in one place.</strong>
             </p>
 
-            <p className="text-lg leading-relaxed text-[#5C6B89] max-w-2xl">
-              Finding trusted vets, groomers, trainers, boarding services, pet supplies, and other care providers shouldn't require juggling multiple apps, websites, and phone calls.
-            </p>
-            
-            <p className="text-lg leading-relaxed text-[#5C6B89] max-w-2xl">
-              Tails 'n' Smiles brings the entire pet care ecosystem together into a single intelligent platform, making it easier for pet parents to discover, book, manage, and track everything their pets need.
-            </p>
+            <div className="space-y-4">
+              <p className="text-lg leading-relaxed text-[#5C6B89] max-w-2xl">
+                Finding trusted vets, groomers, trainers, boarding services, pet supplies, and other care providers shouldn't require juggling multiple apps, websites, and phone calls.
+              </p>
+              
+              <p className="text-lg leading-relaxed text-[#5C6B89] max-w-2xl">
+                Tails 'n' Smiles brings the entire pet care ecosystem together into a single intelligent platform, making it easier for pet parents to discover, book, manage, and track everything their pets need.
+              </p>
+            </div>
 
             {/* CTA Button */}
             <div className="flex flex-wrap items-center gap-5">
