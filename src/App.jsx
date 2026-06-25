@@ -324,7 +324,7 @@ function App() {
         </AnimatePresence>
       </nav>
 
-      <header id="hero" className="pt-32 pb-16 md:pt-40 md:pb-20 px-6 overflow-hidden">
+      <header id="hero" className="pt-32 pb-10 md:pt-40 md:pb-12 px-6 overflow-hidden">
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
           
           {/* Left Hero Content */}
@@ -470,7 +470,7 @@ function App() {
       </header>
 
       {/* FEATURES SECTION */}
-      <section id="features" className="py-24 px-6 bg-[#FFF9F0]">
+      <section id="features" className="py-14 md:py-16 px-6 bg-[#FFF9F0]">
         <div className="max-w-7xl mx-auto space-y-16">
 
           {/* Section Heading */}
@@ -546,7 +546,7 @@ function App() {
 
 
       {/* WHY TAILS 'N' SMILES SECTION */}
-      <section id="why-us" className="py-24 px-6 bg-[#FFF9F0] border-t border-[#1D2A44]/5">
+      <section id="why-us" className="py-14 md:py-16 px-6 bg-[#FFF9F0] border-t border-[#1D2A44]/5">
         <div className="max-w-7xl mx-auto space-y-16">
           
           {/* Section Heading */}
@@ -613,7 +613,7 @@ function App() {
       </section>
 
       {/* PET PARENT BENEFITS SECTION */}
-      <section id="benefits" className="py-24 px-6 bg-[#FFF9F0] border-t border-[#1D2A44]/5">
+      <section id="benefits" className="py-14 md:py-16 px-6 bg-[#FFF9F0] border-t border-[#1D2A44]/5">
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
           
           {/* Left Column: Heading and checklist */}
@@ -717,7 +717,7 @@ function App() {
 
 
       {/* WAITLIST SECTION */}
-      <section id="waitlist" className="py-18 px-6 bg-[#1D2A44] text-[#FFF9F0] relative overflow-hidden">
+      <section id="waitlist" className="py-14 md:py-16 px-6 bg-[#1D2A44] text-[#FFF9F0] relative overflow-hidden">
         
         {/* Background visual circles */}
         <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-orange-400/10 rounded-full blur-3xl pointer-events-none"></div>
