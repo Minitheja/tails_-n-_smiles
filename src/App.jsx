@@ -260,11 +260,11 @@ function App() {
       
       {/* GLASS NAVIGATION BAR */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-[#FFF9F0] border-b border-[#1D2A44]/5 md:bg-[#FFF9F0]/75 md:backdrop-blur-md">
-        <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+        <div className="max-w-7xl mx-auto px-6 py-3 md:py-4 flex justify-between items-center">
           
           {/* Logo */}
           <a href="#hero" className="flex items-center group">
-            <Logo className="h-20 w-auto hover:scale-105 transition-transform duration-300" />
+            <Logo className="h-14 md:h-20 w-auto hover:scale-105 transition-transform duration-300" />
           </a>
 
           {/* Desktop Nav Links */}
@@ -324,7 +324,7 @@ function App() {
         </AnimatePresence>
       </nav>
 
-      <header id="hero" className="pt-28 pb-16 md:pt-36 md:pb-20 px-6 overflow-hidden">
+      <header id="hero" className="pt-32 pb-16 md:pt-40 md:pb-20 px-6 overflow-hidden">
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
           
           {/* Left Hero Content */}
