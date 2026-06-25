@@ -44,10 +44,18 @@
 }
 
 .glass-nav {
-  background: rgba(255, 249, 240, 0.75);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  background: #FFF9F0;
   border-bottom: 1px solid rgba(29, 42, 68, 0.04);
+}
+
+@supports (backdrop-filter: blur(20px)) or (-webkit-backdrop-filter: blur(20px)) {
+  @media (min-width: 768px) {
+    .glass-nav {
+      background: rgba(255, 249, 240, 0.75);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+    }
+  }
 }
 
 /* Custom animations */
