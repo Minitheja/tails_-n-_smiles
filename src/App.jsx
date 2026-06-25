@@ -199,9 +199,9 @@ function App() {
   const [isScanningSymptoms, setIsScanningSymptoms] = useState(false);
   const [scanStep, setScanStep] = useState('idle'); // 'idle', 'scanning', 'analyzing', 'done'
   const [assistantChecklist, setAssistantChecklist] = useState([
-    { id: 1, text: "Rabies booster dose ðŸ’‰", done: true },
-    { id: 2, text: "Afternoon 30-min walk ðŸ¾", done: false },
-    { id: 3, text: "Heartworm medicine pill ðŸ’Š", done: false }
+    { id: 1, text: "Rabies booster dose 💉", done: true },
+    { id: 2, text: "Afternoon 30-min walk 🐾", done: false },
+    { id: 3, text: "Heartworm medicine pill 💊", done: false }
   ]);
 
   const toggleChecklistItem = (id) => {
@@ -233,7 +233,7 @@ function App() {
   // Chatbot states
   const [isChatOpen, setIsChatOpen] = useState(false);
   const [chatMessages, setChatMessages] = useState([
-    { sender: 'bot', text: "ðŸ¾ Woof & Meow! I'm Tails AI, your intelligent pet companion. How can I help you care for your furry friend today?" }
+    { sender: 'bot', text: "🐾 Woof & Meow! I'm Tails AI, your intelligent pet companion. How can I help you care for your furry friend today?" }
   ]);
   const [userInput, setUserInput] = useState('');
   const [isBotTyping, setIsBotTyping] = useState(false);
@@ -290,11 +290,11 @@ function App() {
       
       const lowerMessage = message.toLowerCase();
       if (lowerMessage.includes('food') || lowerMessage.includes('diet') || lowerMessage.includes('eat')) {
-        reply = "ðŸ¾ Nutrition is key! Tails AI can generate custom meal plans depending on your pet's age, weight, and allergy history. For instance, growing puppies need high protein, while senior dogs benefit from joint support formula. What breed do you have?";
+        reply = "🐾 Nutrition is key! Tails AI can generate custom meal plans depending on your pet's age, weight, and allergy history. For instance, growing puppies need high protein, while senior dogs benefit from joint support formula. What breed do you have?";
       } else if (lowerMessage.includes('vet') || lowerMessage.includes('symptom') || lowerMessage.includes('sick')) {
-        reply = "ðŸ©º Standard warning: If this is an emergency, please visit a local vet clinic immediately. In standard health checks, I can scan symptoms like lethargy or scratching and connect you with a 24/7 tele-vet consultation in under 5 minutes!";
+        reply = "🩺 Standard warning: If this is an emergency, please visit a local vet clinic immediately. In standard health checks, I can scan symptoms like lethargy or scratching and connect you with a 24/7 tele-vet consultation in under 5 minutes!";
       } else if (lowerMessage.includes('groom') || lowerMessage.includes('hair') || lowerMessage.includes('nail')) {
-        reply = "âœ‚ï¸ Bathing, haircuts, and nail trims should be stress-free! You can book verified home-groomers who come directly to your driveway, or schedule a spot at nearby premier pet spas. Shall we look up local services?";
+        reply = "✂️ Bathing, haircuts, and nail trims should be stress-free! You can book verified home-groomers who come directly to your driveway, or schedule a spot at nearby premier pet spas. Shall we look up local services?";
       }
 
       setChatMessages(prev => [...prev, { sender: 'bot', text: reply }]);
@@ -303,15 +303,15 @@ function App() {
 
   const chatbotQuickPrompts = [
     {
-      q: "ðŸ¾ What is Tails 'n' Smiles?",
+      q: "🐾 What is Tails 'n' Smiles?",
       a: "Tails 'n' Smiles is a comprehensive, AI-powered pet care ecosystem bringing together veterinarians, groomers, trainers, boarding services, and supplies into a single unified platform. It uses smart collars and AI analysis to give you peace of mind and simplify pet parenting."
     },
     {
-      q: "ðŸ©º Try Symptom Checker",
+      q: "🩺 Try Symptom Checker",
       a: "Our AI Symptom Checker helps analyze abnormalities (e.g. skin rashes, ear shaking, digestive upsets). Simply describe the issue, and Tails AI evaluates urgency levels and recommends nearby certified vets if needed."
     },
     {
-      q: "ðŸ’Š Medication alerts?",
+      q: "💊 Medication alerts?",
       a: "Tails AI syncs with your pet's health record. It automatically sends push notifications when it's time for vaccines, heartworm medicine, or daily pills, and tracks completion so you never miss a dose."
     }
   ];
@@ -404,7 +404,7 @@ function App() {
           >
             {/* Launching Soon Badge */}
             <div className="inline-flex items-center gap-2 bg-[#FFC83D]/15 text-[#FF7A00] font-bold px-4 py-2 rounded-full border border-[#FFC83D]/25 shadow-soft-sm">
-              <span className="animate-bounce">ðŸš€</span> Launching Soon
+              <span className="animate-bounce">🚀</span> Launching Soon
             </div>
 
             {/* Main Heading */}
@@ -815,7 +815,7 @@ function App() {
                         <h5 className="font-bold text-sm text-[#1D2A44]">Rabies Booster Vaccine</h5>
                         <span className="text-[10px] text-red-500 font-bold bg-red-50 px-2 py-0.5 rounded-full">Due in 5 days</span>
                       </div>
-                      <p className="text-xs text-[#5C6B89]">Green Valley Vet Clinic â€¢ Dr. Sarah Miller</p>
+                      <p className="text-xs text-[#5C6B89]">Green Valley Vet Clinic • Dr. Sarah Miller</p>
                       <button className="bg-[#1D2A44] hover:bg-[#FFC83D] hover:text-[#1D2A44] text-[#FFF9F0] font-bold text-[10px] px-3.5 py-1.5 rounded-lg mt-2 transition-colors">
                         Confirm Appointment
                       </button>
@@ -967,7 +967,7 @@ function App() {
                 type="submit"
                 className="bg-[#FFC83D] text-[#1D2A44] px-8 py-3.5 rounded-2xl md:rounded-full font-bold text-base hover:bg-white hover:scale-105 shadow-soft transition-all duration-300 whitespace-nowrap"
               >
-                {footerWaitlistSubmitted ? "Registered! ðŸŽ‰" : "Join Waitlist"}
+                {footerWaitlistSubmitted ? "Registered! 🎉" : "Join Waitlist"}
               </button>
             </form>
           </div>
@@ -1073,7 +1073,7 @@ function App() {
 
         {/* Copyright */}
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center text-xs font-semibold text-[#5C6B89] gap-4">
-          <span>Â© 2026 Tails 'n' Smiles. All Rights Reserved.</span>
+          <span>© 2026 Tails 'n' Smiles. All Rights Reserved.</span>
           <div className="flex gap-6">
             <a href="#" className="hover:text-[#1D2A44]">Privacy Policy</a>
             <a href="#" className="hover:text-[#1D2A44]">Terms of Service</a>
@@ -1095,7 +1095,7 @@ function App() {
               <div className="bg-[#1D2A44] text-white p-4 flex justify-between items-center">
                 <div className="flex items-center gap-2.5">
                   <div className="w-8 h-8 rounded-full bg-[#FFC83D] flex items-center justify-center text-base shadow-sm">
-                    ðŸ¤–
+                    🤖
                   </div>
                   <div>
                     <h4 className="font-display font-bold text-sm text-white flex items-center gap-1.5 leading-none">
