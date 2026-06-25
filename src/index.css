@@ -1,0 +1,136 @@
+@import "tailwindcss";
+
+@theme {
+  --color-cream: #FFF9F0;
+  --color-cream-dark: #F9F1E5;
+  
+  --color-brand-yellow: #FFC83D;
+  --color-brand-navy: #1D2A44;
+  --color-brand-navy-light: #2E3F5F;
+  --color-brand-muted: #5C6B89;
+  
+  --radius-2xl: 24px;
+  --radius-3xl: 32px;
+  
+  --shadow-soft-sm: 0 2px 8px rgba(29, 42, 68, 0.04);
+  --shadow-soft: 0 8px 30px rgba(29, 42, 68, 0.06);
+  --shadow-soft-lg: 0 16px 40px rgba(29, 42, 68, 0.08);
+  --shadow-glass: 0 8px 32px 0 rgba(29, 42, 68, 0.05);
+  
+  --font-sans: "Plus Jakarta Sans", sans-serif;
+  --font-display: "Outfit", sans-serif;
+}
+
+@layer base {
+  body {
+    background-color: #FFF9F0;
+    color: #1D2A44;
+  }
+}
+
+/* Glassmorphism custom classes */
+.glass-card {
+  background: rgba(255, 255, 255, 0.45);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+}
+
+.glass-card-dark {
+  background: rgba(29, 42, 68, 0.03);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(29, 42, 68, 0.05);
+}
+
+.glass-nav {
+  background: rgba(255, 249, 240, 0.75);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(29, 42, 68, 0.04);
+}
+
+/* Custom animations */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-float-delayed-1 {
+  animation: float 6s ease-in-out infinite;
+  animation-delay: 1.5s;
+}
+
+.animate-float-delayed-2 {
+  animation: float 6s ease-in-out infinite;
+  animation-delay: 3s;
+}
+
+.animate-float-delayed-3 {
+  animation: float 6s ease-in-out infinite;
+  animation-delay: 4.5s;
+}
+
+@keyframes pulse-ring {
+  0% {
+    transform: scale(0.95);
+    opacity: 0.5;
+  }
+  50% {
+    transform: scale(1.03);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(0.95);
+    opacity: 0.5;
+  }
+}
+
+.animate-pulse-ring {
+  animation: pulse-ring 6s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Dotted connection line animations */
+@keyframes dash {
+  to {
+    stroke-dashoffset: -40;
+  }
+}
+
+.animate-dash {
+  stroke-dasharray: 6, 6;
+  animation: dash 5s linear infinite;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+/* Hide scrollbar for IE, Edge and Firefox */
+.scrollbar-none {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+/* Custom scroll bar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #FFF9F0;
+}
+::-webkit-scrollbar-thumb {
+  background: #E5DEC9;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #C4BCA8;
+}
