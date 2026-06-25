@@ -407,7 +407,7 @@ function App() {
             </div>
 
             {/* Main Heading */}
-            <h1 className="font-display font-black text-5xl md:text-6xl lg:text-7xl leading-tight tracking-tight text-[#1D2A44]">
+            <h1 className="font-display font-black text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-tight tracking-tight text-[#1D2A44]">
               AI Powered <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF7A00] to-[#FFC83D]">
                 Pet Care Ecosystem
@@ -473,7 +473,7 @@ function App() {
               </svg>
 
               {/* Central Pet Illustration */}
-              <div className="z-10 w-[240px] h-[240px] rounded-full bg-white/45 backdrop-blur-md flex items-center justify-center border border-white/60 shadow-soft overflow-hidden p-3.5">
+              <div className="z-10 w-[140px] h-[140px] sm:w-[240px] sm:h-[240px] rounded-full bg-white/45 backdrop-blur-md flex items-center justify-center border border-white/60 shadow-soft overflow-hidden p-2 sm:p-3.5">
                 <img 
                   src="/hero_pets.png" 
                   alt="Tails 'n' Smiles Mascot Pets" 
@@ -483,61 +483,61 @@ function App() {
 
               {/* Node 1: AI Vet Consultation (Top Center) */}
               <div className="absolute left-[50%] top-[14%] -translate-x-1/2 -translate-y-1/2 z-20 animate-float">
-                <div className="glass-card shadow-soft p-3 rounded-2xl flex flex-col items-center gap-1 min-w-[100px] border border-white hover:scale-105 hover:bg-white/80 transition-all duration-300">
-                  <div className="bg-red-100 p-2 rounded-xl text-red-500 shadow-sm">
-                    <Stethoscope size={22} />
+                <div className="glass-card shadow-soft p-2 sm:p-3 rounded-xl sm:rounded-2xl flex flex-col items-center gap-1 min-w-[80px] sm:min-w-[100px] border border-white hover:scale-105 hover:bg-white/80 transition-all duration-300">
+                  <div className="bg-red-100 p-1.5 sm:p-2 rounded-lg sm:rounded-xl text-red-500 shadow-sm">
+                    <Stethoscope className="w-4.5 h-4.5 sm:w-[22px] sm:h-[22px]" />
                   </div>
-                  <span className="text-[11px] font-bold text-[#1D2A44] text-center leading-tight">AI Vet<br />Consultation</span>
+                  <span className="text-[9px] sm:text-[11px] font-bold text-[#1D2A44] text-center leading-tight">AI Vet<br />Consultation</span>
                 </div>
               </div>
 
               {/* Node 2: Grooming Services (Top Right) */}
               <div className="absolute left-[81%] top-[32%] -translate-x-1/2 -translate-y-1/2 z-20 animate-float-delayed-1">
-                <div className="glass-card shadow-soft p-3 rounded-2xl flex flex-col items-center gap-1 min-w-[100px] border border-white hover:scale-105 hover:bg-white/80 transition-all duration-300">
-                  <div className="bg-blue-100 p-2 rounded-xl text-blue-500 shadow-sm">
-                    <Scissors size={22} />
+                <div className="glass-card shadow-soft p-2 sm:p-3 rounded-xl sm:rounded-2xl flex flex-col items-center gap-1 min-w-[80px] sm:min-w-[100px] border border-white hover:scale-105 hover:bg-white/80 transition-all duration-300">
+                  <div className="bg-blue-100 p-1.5 sm:p-2 rounded-lg sm:rounded-xl text-blue-500 shadow-sm">
+                    <Scissors className="w-4.5 h-4.5 sm:w-[22px] sm:h-[22px]" />
                   </div>
-                  <span className="text-[11px] font-bold text-[#1D2A44] text-center leading-tight">Grooming<br />Services</span>
+                  <span className="text-[9px] sm:text-[11px] font-bold text-[#1D2A44] text-center leading-tight">Grooming<br />Services</span>
                 </div>
               </div>
 
               {/* Node 3: Pet Supplies Delivery (Bottom Right) */}
               <div className="absolute left-[81%] top-[68%] -translate-x-1/2 -translate-y-1/2 z-20 animate-float-delayed-2">
-                <div className="glass-card shadow-soft p-3 rounded-2xl flex flex-col items-center gap-1 min-w-[100px] border border-white hover:scale-105 hover:bg-white/80 transition-all duration-300">
-                  <div className="bg-green-100 p-2 rounded-xl text-green-500 shadow-sm">
-                    <ShoppingBag size={22} />
+                <div className="glass-card shadow-soft p-2 sm:p-3 rounded-xl sm:rounded-2xl flex flex-col items-center gap-1 min-w-[80px] sm:min-w-[100px] border border-white hover:scale-105 hover:bg-white/80 transition-all duration-300">
+                  <div className="bg-green-100 p-1.5 sm:p-2 rounded-lg sm:rounded-xl text-green-500 shadow-sm">
+                    <ShoppingBag className="w-4.5 h-4.5 sm:w-[22px] sm:h-[22px]" />
                   </div>
-                  <span className="text-[11px] font-bold text-[#1D2A44] text-center leading-tight">Supplies<br />Delivery</span>
+                  <span className="text-[9px] sm:text-[11px] font-bold text-[#1D2A44] text-center leading-tight">Supplies<br />Delivery</span>
                 </div>
               </div>
 
               {/* Node 4: Boarding & Daycare (Bottom Center) */}
               <div className="absolute left-[50%] top-[86%] -translate-x-1/2 -translate-y-1/2 z-20 animate-float">
-                <div className="glass-card shadow-soft p-3 rounded-2xl flex flex-col items-center gap-1 min-w-[100px] border border-white hover:scale-105 hover:bg-white/80 transition-all duration-300">
-                  <div className="bg-purple-100 p-2 rounded-xl text-purple-500 shadow-sm">
-                    <Home size={22} />
+                <div className="glass-card shadow-soft p-2 sm:p-3 rounded-xl sm:rounded-2xl flex flex-col items-center gap-1 min-w-[80px] sm:min-w-[100px] border border-white hover:scale-105 hover:bg-white/80 transition-all duration-300">
+                  <div className="bg-purple-100 p-1.5 sm:p-2 rounded-lg sm:rounded-xl text-purple-500 shadow-sm">
+                    <Home className="w-4.5 h-4.5 sm:w-[22px] sm:h-[22px]" />
                   </div>
-                  <span className="text-[11px] font-bold text-[#1D2A44] text-center leading-tight">Boarding &<br />Daycare</span>
+                  <span className="text-[9px] sm:text-[11px] font-bold text-[#1D2A44] text-center leading-tight">Boarding &<br />Daycare</span>
                 </div>
               </div>
 
               {/* Node 5: Health Monitoring (Bottom Left) */}
               <div className="absolute left-[19%] top-[68%] -translate-x-1/2 -translate-y-1/2 z-20 animate-float-delayed-1">
-                <div className="glass-card shadow-soft p-3 rounded-2xl flex flex-col items-center gap-1 min-w-[100px] border border-white hover:scale-105 hover:bg-white/80 transition-all duration-300">
-                  <div className="bg-orange-100 p-2 rounded-xl text-orange-500 shadow-sm animate-pulse">
-                    <Activity size={22} />
+                <div className="glass-card shadow-soft p-2 sm:p-3 rounded-xl sm:rounded-2xl flex flex-col items-center gap-1 min-w-[80px] sm:min-w-[100px] border border-white hover:scale-105 hover:bg-white/80 transition-all duration-300">
+                  <div className="bg-orange-100 p-1.5 sm:p-2 rounded-lg sm:rounded-xl text-orange-500 shadow-sm animate-pulse">
+                    <Activity className="w-4.5 h-4.5 sm:w-[22px] sm:h-[22px]" />
                   </div>
-                  <span className="text-[11px] font-bold text-[#1D2A44] text-center leading-tight">Health<br />Monitoring</span>
+                  <span className="text-[9px] sm:text-[11px] font-bold text-[#1D2A44] text-center leading-tight">Health<br />Monitoring</span>
                 </div>
               </div>
 
               {/* Node 6: Pet Training (Top Left) */}
               <div className="absolute left-[19%] top-[32%] -translate-x-1/2 -translate-y-1/2 z-20 animate-float-delayed-2">
-                <div className="glass-card shadow-soft p-3 rounded-2xl flex flex-col items-center gap-1 min-w-[100px] border border-white hover:scale-105 hover:bg-white/80 transition-all duration-300">
-                  <div className="bg-[#FFC83D]/25 p-2 rounded-xl text-[#FF7A00] shadow-sm">
-                    <Brain size={22} />
+                <div className="glass-card shadow-soft p-2 sm:p-3 rounded-xl sm:rounded-2xl flex flex-col items-center gap-1 min-w-[80px] sm:min-w-[100px] border border-white hover:scale-105 hover:bg-white/80 transition-all duration-300">
+                  <div className="bg-[#FFC83D]/25 p-1.5 sm:p-2 rounded-lg sm:rounded-xl text-[#FF7A00] shadow-sm">
+                    <Brain className="w-4.5 h-4.5 sm:w-[22px] sm:h-[22px]" />
                   </div>
-                  <span className="text-[11px] font-bold text-[#1D2A44] text-center leading-tight">Pet<br />Training</span>
+                  <span className="text-[9px] sm:text-[11px] font-bold text-[#1D2A44] text-center leading-tight">Pet<br />Training</span>
                 </div>
               </div>
 
