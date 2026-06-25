@@ -552,9 +552,7 @@ function App() {
 
           {/* Section Heading */}
           <div className="text-center max-w-3xl mx-auto space-y-4">
-            <div className="inline-flex items-center gap-1.5 bg-[#FFC83D]/15 text-[#FF7A00] font-bold px-4 py-1.5 rounded-full border border-[#FFC83D]/25">
-              <Sparkles size={16} /> Features
-            </div>
+            <span className="font-bold text-[#FF7A00] tracking-wider uppercase text-sm">Features</span>
             <h2 className="font-display font-extrabold text-4xl md:text-5xl tracking-tight text-[#1D2A44]">
               Intelligent Pet Care, Simplified
             </h2>
