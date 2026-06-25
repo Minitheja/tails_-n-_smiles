@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import heroPetsImg from './assets/hero_pets.png';
+import qrCodeSvg from './assets/qr_code.svg';
 import {
   Sparkles,
   Activity,
@@ -103,7 +104,7 @@ const HeroPetIllustration = () => (
   </svg>
 );
 
-const Logo = ({ className = "h-10" }) => (
+const Logo = ({ className = "h-12" }) => (
   <svg className={className} viewBox="0 0 170 120" fill="none" xmlns="http://www.w3.org/2000/svg">
     <rect width="170" height="120" rx="28" fill="#FFC83D" />
     <text 
@@ -182,8 +183,6 @@ const RobotIllustration = () => (
 
 function App() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [emailInput, setEmailInput] = useState('');
-  const [waitlistSubmitted, setWaitlistSubmitted] = useState(false);
   const [selectedServiceTab, setSelectedServiceTab] = useState('Walkers');
   
   // States for interactive UI mockups
@@ -226,17 +225,9 @@ function App() {
     }, 1000);
   };
   
-  // Waitlist footer section email state
-  const [footerEmail, setFooterEmail] = useState('');
-  const [footerWaitlistSubmitted, setFooterWaitlistSubmitted] = useState(false);
 
-  // Chatbot states
-  const [isChatOpen, setIsChatOpen] = useState(false);
-  const [chatMessages, setChatMessages] = useState([
-    { sender: 'bot', text: "🐾 Woof & Meow! I'm Tails AI, your intelligent pet companion. How can I help you care for your furry friend today?" }
-  ]);
-  const [userInput, setUserInput] = useState('');
-  const [isBotTyping, setIsBotTyping] = useState(false);
+
+
 
   // Real-time update simulations
   useEffect(() => {
@@ -247,74 +238,9 @@ function App() {
     return () => clearInterval(interval);
   }, []);
 
-  // Waitlist submission handler
-  const handleWaitlistSubmit = (e, source) => {
-    e.preventDefault();
-    const email = source === 'hero' ? emailInput : footerEmail;
-    if (!email) return;
-    
-    if (source === 'hero') {
-      setWaitlistSubmitted(true);
-      setTimeout(() => setEmailInput(''), 2000);
-    } else {
-      setFooterWaitlistSubmitted(true);
-      setTimeout(() => setFooterEmail(''), 2000);
-    }
-  };
 
-  // Chatbot question handler
-  const handleChatQuestion = (question, answer) => {
-    setChatMessages(prev => [...prev, { sender: 'user', text: question }]);
-    setIsBotTyping(true);
-    
-    setTimeout(() => {
-      setIsBotTyping(false);
-      setChatMessages(prev => [...prev, { sender: 'bot', text: answer }]);
-    }, 1200);
-  };
 
-  // Chatbot manual text submission
-  const handleSendChat = (e) => {
-    e.preventDefault();
-    if (!userInput.trim()) return;
 
-    const message = userInput;
-    setChatMessages(prev => [...prev, { sender: 'user', text: message }]);
-    setUserInput('');
-    setIsBotTyping(true);
-
-    // AI dynamic custom responses based on keywords
-    setTimeout(() => {
-      setIsBotTyping(false);
-      let reply = "Woof! That sounds like an important question. When Tails 'n' Smiles launches, our AI assistant will analyze your pet's specific medical records, breed trends, and collar data to give you personalized clinical suggestions. Stay tuned!";
-      
-      const lowerMessage = message.toLowerCase();
-      if (lowerMessage.includes('food') || lowerMessage.includes('diet') || lowerMessage.includes('eat')) {
-        reply = "🐾 Nutrition is key! Tails AI can generate custom meal plans depending on your pet's age, weight, and allergy history. For instance, growing puppies need high protein, while senior dogs benefit from joint support formula. What breed do you have?";
-      } else if (lowerMessage.includes('vet') || lowerMessage.includes('symptom') || lowerMessage.includes('sick')) {
-        reply = "🩺 Standard warning: If this is an emergency, please visit a local vet clinic immediately. In standard health checks, I can scan symptoms like lethargy or scratching and connect you with a 24/7 tele-vet consultation in under 5 minutes!";
-      } else if (lowerMessage.includes('groom') || lowerMessage.includes('hair') || lowerMessage.includes('nail')) {
-        reply = "✂️ Bathing, haircuts, and nail trims should be stress-free! You can book verified home-groomers who come directly to your driveway, or schedule a spot at nearby premier pet spas. Shall we look up local services?";
-      }
-
-      setChatMessages(prev => [...prev, { sender: 'bot', text: reply }]);
-    }, 1500);
-  };
-
-  const chatbotQuickPrompts = [
-    {
-      q: "🐾 What is Tails 'n' Smiles?",
-      a: "Tails 'n' Smiles is a comprehensive, AI-powered pet care ecosystem bringing together veterinarians, groomers, trainers, boarding services, and supplies into a single unified platform. It uses smart collars and AI analysis to give you peace of mind and simplify pet parenting."
-    },
-    {
-      q: "🩺 Try Symptom Checker",
-      a: "Our AI Symptom Checker helps analyze abnormalities (e.g. skin rashes, ear shaking, digestive upsets). Simply describe the issue, and Tails AI evaluates urgency levels and recommends nearby certified vets if needed."
-    },
-    {
-      q: "💊 Medication alerts?",
-      a: "Tails AI syncs with your pet's health record. It automatically sends push notifications when it's time for vaccines, heartworm medicine, or daily pills, and tracks completion so you never miss a dose."
-    }
-  ];
 
   const supplyProducts = [
     { name: "Organic Puppy Kibble", category: "Food", price: "$24.99", rating: 4.8 },
@@ -338,22 +264,25 @@ function App() {
           
           {/* Logo */}
           <a href="#hero" className="flex items-center group">
-            <Logo className="h-11 w-auto hover:scale-105 transition-transform duration-300" />
+            <Logo className="h-20 w-auto hover:scale-105 transition-transform duration-300" />
           </a>
 
           {/* Desktop Nav Links */}
           <div className="hidden md:flex items-center gap-8 font-medium text-[#2E3F5F]">
             <a href="#features" className="hover:text-[#1D2A44] hover:scale-105 transition-all">Features</a>
-            <a href="#how-it-works" className="hover:text-[#1D2A44] hover:scale-105 transition-all">How It Works</a>
             <a href="#why-us" className="hover:text-[#1D2A44] hover:scale-105 transition-all">Why Us</a>
             <a href="#benefits" className="hover:text-[#1D2A44] hover:scale-105 transition-all">Benefits</a>
-            <a href="#testimonials" className="hover:text-[#1D2A44] hover:scale-105 transition-all">Testimonials</a>
           </div>
 
           {/* Right CTA */}
           <div className="hidden md:flex items-center gap-4">
-            <a href="#waitlist" className="bg-[#1D2A44] text-[#FFF9F0] px-5 py-2.5 rounded-full font-semibold hover:bg-[#FFC83D] hover:text-[#1D2A44] shadow-soft hover:shadow-soft-lg transform hover:-translate-y-0.5 transition-all duration-300">
-              Join Waitlist
+            <a 
+              href="https://join.tailsnsmiles.com/pet-parent" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="bg-[#1D2A44] text-[#FFF9F0] px-5 py-2.5 rounded-full font-semibold hover:bg-[#FFC83D] hover:text-[#1D2A44] shadow-soft hover:shadow-soft-lg transform hover:-translate-y-0.5 transition-all duration-300"
+            >
+              Join Community
             </a>
           </div>
 
@@ -377,13 +306,17 @@ function App() {
               className="md:hidden bg-[#FFF9F0] border-t border-[#1D2A44]/5 px-6 py-6 space-y-4 shadow-lg"
             >
               <a href="#features" onClick={() => setMobileMenuOpen(false)} className="block font-semibold text-lg text-[#2E3F5F] hover:text-[#1D2A44]">Features</a>
-              <a href="#how-it-works" onClick={() => setMobileMenuOpen(false)} className="block font-semibold text-lg text-[#2E3F5F] hover:text-[#1D2A44]">How It Works</a>
               <a href="#why-us" onClick={() => setMobileMenuOpen(false)} className="block font-semibold text-lg text-[#2E3F5F] hover:text-[#1D2A44]">Why Us</a>
               <a href="#benefits" onClick={() => setMobileMenuOpen(false)} className="block font-semibold text-lg text-[#2E3F5F] hover:text-[#1D2A44]">Benefits</a>
-              <a href="#testimonials" onClick={() => setMobileMenuOpen(false)} className="block font-semibold text-lg text-[#2E3F5F] hover:text-[#1D2A44]">Testimonials</a>
               <div className="pt-4 border-t border-[#1D2A44]/10">
-                <a href="#waitlist" onClick={() => setMobileMenuOpen(false)} className="block w-full text-center bg-[#1D2A44] text-[#FFF9F0] py-3 rounded-full font-semibold">
-                  Join Waitlist
+                <a 
+                  href="https://join.tailsnsmiles.com/pet-parent" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  onClick={() => setMobileMenuOpen(false)} 
+                  className="block w-full text-center bg-[#1D2A44] text-[#FFF9F0] py-3 rounded-full font-semibold"
+                >
+                  Join Community
                 </a>
               </div>
             </motion.div>
@@ -391,7 +324,7 @@ function App() {
         </AnimatePresence>
       </nav>
 
-      <header id="hero" className="pt-20 pb-16 md:pt-28 md:pb-20 px-6 overflow-hidden">
+      <header id="hero" className="pt-28 pb-16 md:pt-36 md:pb-20 px-6 overflow-hidden">
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
           
           {/* Left Hero Content */}
@@ -431,24 +364,13 @@ function App() {
             {/* CTA Button */}
             <div className="flex flex-wrap items-center gap-5">
               <a
-                href="#waitlist"
+                href="https://join.tailsnsmiles.com/pet-parent"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 bg-[#1D2A44] text-[#FFF9F0] px-8 py-4 rounded-full font-bold text-base hover:bg-[#FFC83D] hover:text-[#1D2A44] shadow-soft transform hover:-translate-y-0.5 transition-all duration-300"
               >
-                Join Waitlist <ArrowRight size={18} />
+                Join Community <ArrowRight size={18} />
               </a>
-              <a href="#features" className="flex items-center gap-1.5 text-[#5C6B89] font-medium hover:text-[#1D2A44] transition-colors group">
-                Learn More <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
-              </a>
-            </div>
-
-            {/* Social proof */}
-            <div className="flex items-center gap-2">
-              <div className="flex -space-x-2">
-                <div className="w-8 h-8 rounded-full bg-orange-400 border-2 border-[#FFF9F0] flex items-center justify-center text-xs font-bold text-white">🐶</div>
-                <div className="w-8 h-8 rounded-full bg-[#1D2A44] border-2 border-[#FFF9F0] flex items-center justify-center text-xs font-bold text-white">🐱</div>
-                <div className="w-8 h-8 rounded-full bg-[#FFC83D] border-2 border-[#FFF9F0] flex items-center justify-center text-xs font-bold text-[#1D2A44]">🐰</div>
-              </div>
-              <span className="text-sm font-semibold text-[#1D2A44]">4,200+ Pet parents joined waitlist</span>
             </div>
           </motion.div>
 
@@ -612,7 +534,7 @@ function App() {
                 </div>
                 <div className="space-y-2">
                   <h3 className="font-display font-bold text-xl text-[#1D2A44]">{feature.title}</h3>
-                  <p className="text-[#5C6B89] text-sm leading-relaxed">{feature.desc}</p>
+                  <p className="text-[#5C6B89] text-base leading-relaxed">{feature.desc}</p>
                 </div>
               </motion.div>
             ))}
@@ -621,60 +543,7 @@ function App() {
         </div>
       </section>
 
-      <section id="how-it-works" className="py-24 px-6 bg-[#FFF9F0] border-t border-[#1D2A44]/5">
-        <div className="max-w-7xl mx-auto space-y-16">
-          
-          {/* Section Heading */}
-          <div className="text-center max-w-3xl mx-auto space-y-4">
-            <span className="font-bold text-[#FF7A00] tracking-wider uppercase text-sm">How It Works</span>
-            <h2 className="font-display font-extrabold text-4xl md:text-5xl tracking-tight text-[#1D2A44]">
-              One App. Complete Peace of Mind.
-            </h2>
-            <p className="text-[#5C6B89] text-lg">
-              Simplifying the complicated world of pet parenting in three simple steps.
-            </p>
-          </div>
 
-          {/* 3 Step Layout */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 relative">
-            
-            {/* Step 1 */}
-            <div className="space-y-6 relative flex flex-col items-center md:items-start">
-              <div className="w-16 h-16 rounded-3xl bg-[#FFC83D] text-[#1D2A44] font-display font-extrabold text-2xl flex items-center justify-center shadow-soft">
-                1
-              </div>
-              <h3 className="font-display font-extrabold text-2xl text-[#1D2A44] text-center md:text-left">Discover</h3>
-              <p className="text-[#5C6B89] leading-relaxed text-center md:text-left">
-                Find trusted pet care providers nearby. Screen verified vets, professional dog trainers, local pet groomers, and pet boarding centers with ease.
-              </p>
-            </div>
-
-            {/* Step 2 */}
-            <div className="space-y-6 relative flex flex-col items-center md:items-start">
-              <div className="w-16 h-16 rounded-3xl bg-[#1D2A44] text-[#FFF9F0] font-display font-extrabold text-2xl flex items-center justify-center shadow-soft">
-                2
-              </div>
-              <h3 className="font-display font-extrabold text-2xl text-[#1D2A44] text-center md:text-left">Book</h3>
-              <p className="text-[#5C6B89] leading-relaxed text-center md:text-left">
-                Schedule appointments and services instantly. Skip calls and messy portals by coordinating and locking in times directly through the platform.
-              </p>
-            </div>
-
-            {/* Step 3 */}
-            <div className="space-y-6 relative flex flex-col items-center md:items-start">
-              <div className="w-16 h-16 rounded-3xl bg-teal-500 text-white font-display font-extrabold text-2xl flex items-center justify-center shadow-soft">
-                3
-              </div>
-              <h3 className="font-display font-extrabold text-2xl text-[#1D2A44] text-center md:text-left">Manage</h3>
-              <p className="text-[#5C6B89] leading-relaxed text-center md:text-left">
-                Track health records, medical checklists, vaccination reminders, bookings, and recurring purchases in one central intelligent dashboard.
-              </p>
-            </div>
-
-          </div>
-
-        </div>
-      </section>
 
       {/* WHY TAILS 'N' SMILES SECTION */}
       <section id="why-us" className="py-24 px-6 bg-[#FFF9F0] border-t border-[#1D2A44]/5">
@@ -700,7 +569,7 @@ function App() {
                 <ShieldCheck size={24} />
               </div>
               <h3 className="font-display font-extrabold text-xl text-[#1D2A44]">Trusted Experts</h3>
-              <p className="text-sm text-[#5C6B89] leading-relaxed">
+              <p className="text-base text-[#5C6B89] leading-relaxed">
                 Every veterinarian, groomer, and dog trainer on our ecosystem undergoes screening and credential verification.
               </p>
             </div>
@@ -711,7 +580,7 @@ function App() {
                 <Brain size={24} />
               </div>
               <h3 className="font-display font-extrabold text-xl text-[#1D2A44]">AI Powered Insights</h3>
-              <p className="text-sm text-[#5C6B89] leading-relaxed">
+              <p className="text-base text-[#5C6B89] leading-relaxed">
                 Smart recommendations tailored specifically to your pet's breed characteristics, age, wellness trends, and history.
               </p>
             </div>
@@ -722,7 +591,7 @@ function App() {
                 <ShoppingBag size={24} />
               </div>
               <h3 className="font-display font-extrabold text-xl text-[#1D2A44]">Complete Ecosystem</h3>
-              <p className="text-sm text-[#5C6B89] leading-relaxed">
+              <p className="text-base text-[#5C6B89] leading-relaxed">
                 Everything under one umbrellaâ€”from urgent medical support to custom treats, and styling services.
               </p>
             </div>
@@ -733,7 +602,7 @@ function App() {
                 <Clock size={24} />
               </div>
               <h3 className="font-display font-extrabold text-xl text-[#1D2A44]">Convenience</h3>
-              <p className="text-sm text-[#5C6B89] leading-relaxed">
+              <p className="text-base text-[#5C6B89] leading-relaxed">
                 One platform, one login, and one card on file to replace a dozen apps, bookmarks, and phone contacts.
               </p>
             </div>
@@ -845,103 +714,16 @@ function App() {
         </div>
       </section>
 
-      {/* TESTIMONIALS SECTION */}
-      <section id="testimonials" className="py-24 px-6 bg-[#FFF9F0] border-t border-[#1D2A44]/5">
-        <div className="max-w-7xl mx-auto space-y-16">
-          
-          {/* Section Heading */}
-          <div className="text-center max-w-3xl mx-auto space-y-4">
-            <span className="font-bold text-[#FF7A00] tracking-wider uppercase text-sm">Testimonials</span>
-            <h2 className="font-display font-extrabold text-4xl md:text-5xl tracking-tight text-[#1D2A44]">
-              Loved by Pets, Trusted by Parents
-            </h2>
-            <p className="text-[#5C6B89] text-lg">
-              Here's what our early beta test community has to say about Tails 'n' Smiles.
-            </p>
-          </div>
 
-          {/* Testimonial Cards Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            
-            {/* Review 1 */}
-            <div className="bg-white p-8 rounded-3xl border border-[#1D2A44]/5 shadow-soft flex flex-col justify-between space-y-6">
-              <div className="space-y-4">
-                {/* Stars */}
-                <div className="flex items-center gap-1 text-[#FFC83D]">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} size={18} fill="currentColor" />
-                  ))}
-                </div>
-                <p className="text-[#2E3F5F] leading-relaxed italic text-sm">
-                  "Tails 'n' Smiles finally brings every pet service into one place. Exactly what pet parents need. I can schedule a vet consult and recurring supplies delivery simultaneously."
-                </p>
-              </div>
-              <div className="flex items-center gap-3 pt-4 border-t border-[#1D2A44]/5">
-                <div className="w-10 h-10 rounded-full bg-teal-100 flex items-center justify-center font-bold text-teal-600 text-sm">JS</div>
-                <div>
-                  <h4 className="font-bold text-sm text-[#1D2A44]">Jessica S.</h4>
-                  <span className="text-xs text-[#5C6B89]">Owner of Luna (Golden Retriever)</span>
-                </div>
-              </div>
-            </div>
-
-            {/* Review 2 */}
-            <div className="bg-white p-8 rounded-3xl border border-[#1D2A44]/5 shadow-soft flex flex-col justify-between space-y-6">
-              <div className="space-y-4">
-                {/* Stars */}
-                <div className="flex items-center gap-1 text-[#FFC83D]">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} size={18} fill="currentColor" />
-                  ))}
-                </div>
-                <p className="text-[#2E3F5F] leading-relaxed italic text-sm">
-                  "The AI recommendations and reminders make caring for my dog so much easier. The sync between the smart collar vaccine list and vet booking is absolutely magical."
-                </p>
-              </div>
-              <div className="flex items-center gap-3 pt-4 border-t border-[#1D2A44]/5">
-                <div className="w-10 h-10 rounded-full bg-orange-100 flex items-center justify-center font-bold text-orange-600 text-sm">MH</div>
-                <div>
-                  <h4 className="font-bold text-sm text-[#1D2A44]">Mark H.</h4>
-                  <span className="text-xs text-[#5C6B89]">Owner of Ollie (French Bulldog)</span>
-                </div>
-              </div>
-            </div>
-
-            {/* Review 3 */}
-            <div className="bg-white p-8 rounded-3xl border border-[#1D2A44]/5 shadow-soft flex flex-col justify-between space-y-6">
-              <div className="space-y-4">
-                {/* Stars */}
-                <div className="flex items-center gap-1 text-[#FFC83D]">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} size={18} fill="currentColor" />
-                  ))}
-                </div>
-                <p className="text-[#2E3F5F] leading-relaxed italic text-sm">
-                  "Booking vets and groomers has never been this simple. I love having an intelligent companion in my pocket that tells me when my cat needs her dietary support Soft Chews."
-                </p>
-              </div>
-              <div className="flex items-center gap-3 pt-4 border-t border-[#1D2A44]/5">
-                <div className="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center font-bold text-purple-600 text-sm">SM</div>
-                <div>
-                  <h4 className="font-bold text-sm text-[#1D2A44]">Sarah M.</h4>
-                  <span className="text-xs text-[#5C6B89]">Owner of Mittens (Tabby Cat)</span>
-                </div>
-              </div>
-            </div>
-
-          </div>
-
-        </div>
-      </section>
 
       {/* WAITLIST SECTION */}
-      <section id="waitlist" className="py-24 px-6 bg-[#1D2A44] text-[#FFF9F0] relative overflow-hidden">
+      <section id="waitlist" className="py-18 px-6 bg-[#1D2A44] text-[#FFF9F0] relative overflow-hidden">
         
         {/* Background visual circles */}
         <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-orange-400/10 rounded-full blur-3xl pointer-events-none"></div>
         <div className="absolute bottom-0 left-0 w-[300px] h-[300px] bg-teal-400/5 rounded-full blur-2xl pointer-events-none"></div>
         
-        <div className="max-w-4xl mx-auto text-center space-y-10 relative z-10">
+        <div className="max-w-4xl mx-auto text-center space-y-8 relative z-10">
           
           <div className="space-y-4">
             <span className="font-bold text-[#FFC83D] tracking-wider uppercase text-sm">Join the ecosystem</span>
@@ -949,28 +731,41 @@ function App() {
               Be Among the First Pet Parents
             </h2>
             <p className="text-[#E5DEC9] text-lg max-w-xl mx-auto">
-              Join the waitlist and get early access to the future of pet care. Special launch benefits inside.
+              Join our community of pet parents and get early access to the future of pet care. Special launch benefits inside.
             </p>
           </div>
 
-          {/* Email Signup Form */}
-          <div className="max-w-lg mx-auto bg-white/5 backdrop-blur-md p-2 rounded-3xl md:rounded-full border border-white/10 shadow-lg">
-            <form onSubmit={(e) => handleWaitlistSubmit(e, 'footer')} className="flex flex-col md:flex-row gap-2">
-              <input 
-                type="email"
-                value={footerEmail}
-                onChange={(e) => setFooterEmail(e.target.value)}
-                placeholder="Email Address"
-                className="flex-grow bg-transparent px-5 py-3.5 focus:outline-none text-base placeholder:text-[#E5DEC9]/60 text-white font-medium"
-                required
-              />
-              <button 
-                type="submit"
-                className="bg-[#FFC83D] text-[#1D2A44] px-8 py-3.5 rounded-2xl md:rounded-full font-bold text-base hover:bg-white hover:scale-105 shadow-soft transition-all duration-300 whitespace-nowrap"
+          {/* Join CTA & QR Code Container */}
+          <div className="flex flex-col md:flex-row items-center justify-center gap-8 max-w-2xl mx-auto bg-white/5 backdrop-blur-md p-6 sm:p-8 rounded-3xl border border-white/10 shadow-lg">
+            
+            {/* Left: Button */}
+            <div className="flex flex-col items-center md:items-start text-center md:text-left gap-4">
+              <h3 className="font-display font-bold text-xl text-[#FFF9F0]">Access the Community Portal</h3>
+              <p className="text-sm text-[#E5DEC9] max-w-xs leading-relaxed">
+                Click the button below to join the community space immediately on your desktop or browser.
+              </p>
+              <a 
+                href="https://join.tailsnsmiles.com/pet-parent" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 bg-[#FFC83D] text-[#1D2A44] px-8 py-4 rounded-full font-bold text-base hover:bg-[#FFF9F0] hover:scale-105 shadow-soft transition-all duration-300 whitespace-nowrap"
               >
-                {footerWaitlistSubmitted ? "Registered! 🎉" : "Join Waitlist"}
-              </button>
-            </form>
+                Join Community <ArrowRight size={18} />
+              </a>
+            </div>
+
+            {/* Right: QR Code */}
+            <div className="flex flex-col items-center gap-4 border-t md:border-t-0 md:border-l border-white/10 pt-6 md:pt-0 md:pl-8">
+              <div className="bg-white p-4 rounded-3xl shadow-soft">
+                <img 
+                  src={qrCodeSvg} 
+                  alt="QR Code to Join Community" 
+                  className="w-38 h-38 object-contain"
+                />
+              </div>
+              <span className="text-xs font-bold text-[#E5DEC9] tracking-wide uppercase">Scan to join on mobile</span>
+            </div>
+
           </div>
 
           {/* Included Features */}
@@ -993,13 +788,13 @@ function App() {
       </section>
 
       {/* FOOTER */}
-      <footer className="bg-[#FFF9F0] text-[#1D2A44] py-16 px-6 border-t border-[#1D2A44]/5">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-12 border-b border-[#1D2A44]/10 pb-12 mb-12">
+      <footer className="bg-[#FFF9F0] text-[#1D2A44] pt-10 pb-6 px-6 border-t border-[#1D2A44]/5">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-32 border-b border-[#1D2A44]/10 pb-10 mb-4">
           
           {/* Logo and Tagline */}
-          <div className="md:col-span-5 space-y-4">
+          <div className="md:col-span-4 space-y-4">
             <a href="#hero" className="inline-block group">
-              <Logo className="h-14 w-auto hover:scale-105 transition-transform duration-300" />
+              <Logo className="h-20 w-auto hover:scale-105 transition-transform duration-300" />
             </a>
             <p className="text-[#5C6B89] leading-relaxed max-w-sm">
               Everything your pet needs, all in one place. Bringing veterinary guidance, supplies, styling, and monitoring together.
@@ -1007,64 +802,97 @@ function App() {
           </div>
 
           {/* Site Links */}
-          <div className="md:col-span-4 grid grid-cols-2 gap-8">
+          <div className="md:col-span-3 grid grid-cols-2 gap-8">
             <div className="space-y-4">
               <h4 className="font-display font-bold text-sm tracking-wider uppercase text-[#1D2A44]">Navigation</h4>
               <ul className="space-y-2.5 text-sm font-semibold text-[#5C6B89]">
                 <li><a href="#features" className="hover:text-[#1D2A44] transition-colors">Features</a></li>
-                <li><a href="#how-it-works" className="hover:text-[#1D2A44] transition-colors">How It Works</a></li>
                 <li><a href="#why-us" className="hover:text-[#1D2A44] transition-colors">Why Us</a></li>
               </ul>
             </div>
             <div className="space-y-4">
               <h4 className="font-display font-bold text-sm tracking-wider uppercase text-[#1D2A44]">Company</h4>
               <ul className="space-y-2.5 text-sm font-semibold text-[#5C6B89]">
-                <li><a href="#benefits" className="hover:text-[#1D2A44] transition-colors">About</a></li>
-                <li><a href="#testimonials" className="hover:text-[#1D2A44] transition-colors">Contact</a></li>
-                <li><a href="#" className="hover:text-[#1D2A44] transition-colors">Privacy Policy</a></li>
-                <li><a href="#" className="hover:text-[#1D2A44] transition-colors">Terms</a></li>
+                <li><a href="#" className="hover:text-[#1D2A44] transition-colors whitespace-nowrap">Privacy Policy</a></li>
+                <li><a href="#" className="hover:text-[#1D2A44] transition-colors whitespace-nowrap">Terms and Conditions</a></li>
               </ul>
             </div>
           </div>
 
           {/* Social Links */}
-          <div className="md:col-span-3 space-y-4">
-            <h4 className="font-display font-bold text-sm tracking-wider uppercase text-[#1D2A44]">Follow the Pack</h4>
-            <div className="flex items-center gap-3">
+          <div className="md:col-span-5 space-y-4">
+            <h4 className="font-display font-bold text-sm tracking-wider uppercase text-[#1D2A44]">Follow Us</h4>
+            <div className="flex flex-wrap md:flex-nowrap items-center gap-3">
+              {/* Facebook */}
               <a 
-                href="#" 
+                href="https://www.facebook.com/tailsnsmiles" 
+                target="_blank"
+                rel="noopener noreferrer"
                 aria-label="Facebook"
-                className="bg-white hover:bg-[#FFC83D] hover:text-[#1D2A44] p-2.5 rounded-xl border border-[#1D2A44]/5 text-[#5C6B89] shadow-soft-sm transition-all duration-300 flex items-center justify-center w-10 h-10"
+                className="bg-white hover:bg-[#FFC83D] hover:text-[#1D2A44] p-3 rounded-2xl border border-[#1D2A44]/5 text-[#5C6B89] shadow-soft hover:shadow-soft-lg transform hover:-translate-y-1 transition-all duration-300 flex items-center justify-center w-12 h-12"
               >
-                <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <svg className="w-6 h-6 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                   <path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c4.56-.93 8-4.96 8-9.75z"/>
                 </svg>
               </a>
+              {/* Instagram */}
               <a 
-                href="#" 
+                href="https://www.instagram.com/tailsnsmilesofficial" 
+                target="_blank"
+                rel="noopener noreferrer"
                 aria-label="Instagram"
-                className="bg-white hover:bg-[#FFC83D] hover:text-[#1D2A44] p-2.5 rounded-xl border border-[#1D2A44]/5 text-[#5C6B89] shadow-soft-sm transition-all duration-300 flex items-center justify-center w-10 h-10"
+                className="bg-white hover:bg-[#FFC83D] hover:text-[#1D2A44] p-3 rounded-2xl border border-[#1D2A44]/5 text-[#5C6B89] shadow-soft hover:shadow-soft-lg transform hover:-translate-y-1 transition-all duration-300 flex items-center justify-center w-12 h-12"
               >
-                <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <svg className="w-6 h-6 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                   <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
                 </svg>
               </a>
+              {/* YouTube */}
               <a 
-                href="#" 
-                aria-label="LinkedIn"
-                className="bg-white hover:bg-[#FFC83D] hover:text-[#1D2A44] p-2.5 rounded-xl border border-[#1D2A44]/5 text-[#5C6B89] shadow-soft-sm transition-all duration-300 flex items-center justify-center w-10 h-10"
+                href="https://www.youtube.com/@tailsnsmiles" 
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="YouTube"
+                className="bg-white hover:bg-[#FFC83D] hover:text-[#1D2A44] p-3 rounded-2xl border border-[#1D2A44]/5 text-[#5C6B89] shadow-soft hover:shadow-soft-lg transform hover:-translate-y-1 transition-all duration-300 flex items-center justify-center w-12 h-12"
               >
-                <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                <svg className="w-6 h-6 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M23.498 6.163a3.003 3.003 0 0 0-2.11-2.11C19.518 3.545 12 3.545 12 3.545s-7.518 0-9.388.508a3.003 3.003 0 0 0-2.11 2.11C0 8.033 0 12 0 12s0 3.967.502 5.837a3.003 3.003 0 0 0 2.11 2.11c1.87.508 9.388.508 9.388.508s7.518 0 9.388-.508a3.003 3.003 0 0 0 2.11-2.11C24 15.967 24 12 24 12s0-3.967-.502-5.837zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
                 </svg>
               </a>
+              {/* Threads */}
               <a 
-                href="#" 
-                aria-label="X"
-                className="bg-white hover:bg-[#FFC83D] hover:text-[#1D2A44] p-2.5 rounded-xl border border-[#1D2A44]/5 text-[#5C6B89] shadow-soft-sm transition-all duration-300 flex items-center justify-center w-10 h-10"
+                href="https://www.threads.net/@tailsnsmilesofficial" 
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Threads"
+                className="bg-white hover:bg-[#FFC83D] hover:text-[#1D2A44] p-3 rounded-2xl border border-[#1D2A44]/5 text-[#5C6B89] shadow-soft hover:shadow-soft-lg transform hover:-translate-y-1 transition-all duration-300 flex items-center justify-center w-12 h-12"
               >
-                <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                <svg className="w-6 h-6 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M12.923 15.62c-.443.03-.84-.06-1.18-.28A2.298 2.298 0 0 1 10.8 14.37a2.69 2.69 0 0 1-.274-1.2c0-.49.09-.9.25-1.26a2.03 2.03 0 0 1 .715-.86c.315-.22.682-.32 1.1-.32c.367 0 .692.08.973.24a1.8 1.8 0 0 1 .665.66c.153.26.23.56.23.91 0 .42-.1.82-.3 1.16a2.86 2.86 0 0 1-.84 1.02c-.303.22-.622.3-.96.26zm.102-3.12c-.173 0-.323.05-.45.14a.8.8 0 0 0-.295.37c-.063.15-.095.34-.095.56 0 .25.04.45.115.6a.7.7 0 0 0 .295.33c.123.07.25.1.383.09.13-.01.26-.06.39-.16c.142-.1.242-.25.3-.44a1.8 1.8 0 0 0 .08-.51c0-.26-.046-.48-.138-.66a.8.8 0 0 0-.34-.36.78.78 0 0 0-.332-.09zm7.842 1.57c-.07 1.12-.4 2.14-1.004 3.06a6.83 6.83 0 0 1-2.52 2.37c-1.2.7-2.5 1.07-3.9 1.11-1.3-.01-2.57-.26-3.82-.76a7.6 7.6 0 0 1-3.085-2.01A6.87 6.87 0 0 1 4.5 13.56a9.23 9.23 0 0 1-.525-2.91A10.82 10.82 0 0 1 4.6 6.6c.46-.86 1.07-1.57 1.83-2.14a7.8 7.8 0 0 1 3.08-1.51c1.3-.34 2.6-.37 3.9-.1 1.3.27 2.5.83 3.57 1.67a7.1 7.1 0 0 1 2.37 3.32c.4 1.03.54 2.11.41 3.25-.08 1.11-.47 2.05-1.16 2.82a3.83 3.83 0 0 1-2.73 1.34c-1.02.04-1.92-.26-2.7-.91A4.54 4.54 0 0 1 12 13.25c0-.98.24-1.84.73-2.58a4.42 4.42 0 0 1 2.08-1.7 6.7 6.7 0 0 1 2.97-.6c.86.01 1.66.2 2.39.57v.93c-.6-.4-1.28-.62-2.03-.66a5.5 5.5 0 0 0-2.45.41c-.74.34-1.32.86-1.74 1.56a4.2 4.2 0 0 0-.63 2.3c0 1.05.23 1.93.7 2.64a4.04 4.04 0 0 0 1.83 1.56c.74.33 1.53.46 2.36.38a3.1 3.1 0 0 0 2.22-1.08 4.7 4.7 0 0 0 1.1-2.76 12.33 12.33 0 0 0-.08-2.31c-.027-1.34-.41-2.56-1.15-3.64a5.5 5.5 0 0 0-2.03-1.84A6.42 6.42 0 0 0 13 4.24a6.6 6.6 0 0 0-3.25.76A5.34 5.34 0 0 0 7.65 7.06a7.6 7.6 0 0 0-.99 4.04c.07 1.3.41 2.51 1.025 3.61a7.73 7.73 0 0 0 3.635 3.24c.73.3 1.48.43 2.25.38a6.02 6.02 0 0 0 4.02-1.85 7.6 7.6 0 0 0 1.56-2.67 9.87 9.87 0 0 0 .62-2.69z"/>
+                </svg>
+              </a>
+              {/* Pinterest */}
+              <a 
+                href="https://www.pinterest.com/tailsnsmiles" 
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Pinterest"
+                className="bg-white hover:bg-[#FFC83D] hover:text-[#1D2A44] p-3 rounded-2xl border border-[#1D2A44]/5 text-[#5C6B89] shadow-soft hover:shadow-soft-lg transform hover:-translate-y-1 transition-all duration-300 flex items-center justify-center w-12 h-12"
+              >
+                <svg className="w-6 h-6 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.162-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.958 1.406-5.958s-.359-.72-.359-1.781c0-1.663.967-2.906 2.17-2.906 1.023 0 1.517.769 1.517 1.689 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.169 1.775 2.169 2.128 0 3.768-2.245 3.768-5.487 0-2.868-2.061-4.869-5.00-4.869-3.41 0-5.413 2.561-5.413 5.199 0 1.033.394 2.143.889 2.741.099.12.112.225.085.345-.09.375-.293 1.199-.334 1.363-.053.211-.174.263-.403.156-1.493-.699-2.427-2.905-2.427-4.662 0-3.796 2.758-7.285 7.954-7.285 4.175 0 7.419 2.974 7.419 6.956 0 4.148-2.611 7.487-6.242 7.487-1.218 0-2.363-.633-2.756-1.379l-.752 2.863c-.272 1.036-.997 2.337-1.487 3.137A12.015 12.015 0 0012.017 24c6.62 0 11.986-5.367 11.986-11.987C24.003 5.367 18.637 0 12.017 0z"/>
+                </svg>
+              </a>
+              {/* LinkedIn */}
+              <a 
+                href="https://www.linkedin.com/company/134824027" 
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="LinkedIn"
+                className="bg-white hover:bg-[#FFC83D] hover:text-[#1D2A44] p-3 rounded-2xl border border-[#1D2A44]/5 text-[#5C6B89] shadow-soft hover:shadow-soft-lg transform hover:-translate-y-1 transition-all duration-300 flex items-center justify-center w-12 h-12"
+              >
+                <svg className="w-6 h-6 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
                 </svg>
               </a>
             </div>
@@ -1073,121 +901,26 @@ function App() {
         </div>
 
         {/* Copyright */}
-        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center text-xs font-semibold text-[#5C6B89] gap-4">
+        <div className="max-w-7xl mx-auto flex justify-center items-center text-xs font-semibold text-[#5C6B89] gap-4 text-center">
           <span>© 2026 Tails 'n' Smiles. All Rights Reserved.</span>
-          <div className="flex gap-6">
-            <a href="#" className="hover:text-[#1D2A44]">Privacy Policy</a>
-            <a href="#" className="hover:text-[#1D2A44]">Terms of Service</a>
-          </div>
         </div>
       </footer>
 
       {/* FLOATING AI PET ASSISTANT INTERACTIVE CHATBOT (Bottom Right) */}
       <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end">
-        <AnimatePresence>
-          {isChatOpen && (
-            <motion.div
-              initial={{ opacity: 0, y: 30, scale: 0.95 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: 30, scale: 0.95 }}
-              className="bg-white w-[360px] max-w-[calc(100vw-32px)] h-[500px] rounded-3xl shadow-soft-lg border border-[#1D2A44]/10 overflow-hidden flex flex-col justify-between mb-4 z-50"
-            >
-              {/* Chat Header */}
-              <div className="bg-[#1D2A44] text-white p-4 flex justify-between items-center">
-                <div className="flex items-center gap-2.5">
-                  <div className="w-8 h-8 rounded-full bg-[#FFC83D] flex items-center justify-center text-base shadow-sm">
-                    🤖
-                  </div>
-                  <div>
-                    <h4 className="font-display font-bold text-sm text-white flex items-center gap-1.5 leading-none">
-                      Tails AI Assistant <span className="inline-block w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
-                    </h4>
-                    <span className="text-[10px] text-[#E5DEC9] opacity-80 leading-none">Your intelligent pet companion</span>
-                  </div>
-                </div>
-                <button 
-                  onClick={() => setIsChatOpen(false)}
-                  className="text-white/80 hover:text-white transition-colors"
-                >
-                  <X size={20} />
-                </button>
-              </div>
-
-              {/* Chat Message Box */}
-              <div className="flex-grow p-4 overflow-y-auto space-y-3 bg-[#FFF9F0]/65">
-                {chatMessages.map((msg, index) => (
-                  <div 
-                    key={index}
-                    className={`flex ${msg.sender === 'user' ? 'justify-end' : 'justify-start'}`}
-                  >
-                    <div 
-                      className={`max-w-[82%] px-4 py-2.5 rounded-2xl text-xs leading-relaxed shadow-soft-sm ${
-                        msg.sender === 'user'
-                          ? 'bg-[#1D2A44] text-[#FFF9F0] rounded-tr-none'
-                          : 'bg-white text-[#1D2A44] border border-[#1D2A44]/5 rounded-tl-none'
-                      }`}
-                    >
-                      {msg.text}
-                    </div>
-                  </div>
-                ))}
-                
-                {/* Bot Typing indicator */}
-                {isBotTyping && (
-                  <div className="flex justify-start">
-                    <div className="bg-white text-[#5C6B89] border border-[#1D2A44]/5 px-4 py-2.5 rounded-2xl rounded-tl-none flex items-center gap-1.5 shadow-soft-sm">
-                      <span className="w-1.5 h-1.5 bg-[#5C6B89] rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></span>
-                      <span className="w-1.5 h-1.5 bg-[#5C6B89] rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></span>
-                      <span className="w-1.5 h-1.5 bg-[#5C6B89] rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></span>
-                    </div>
-                  </div>
-                )}
-              </div>
-
-              {/* Quick Prompts List */}
-              <div className="px-4 py-2 bg-white border-t border-[#1D2A44]/5 flex gap-2 overflow-x-auto whitespace-nowrap scrollbar-none">
-                {chatbotQuickPrompts.map((p, i) => (
-                  <button
-                    key={i}
-                    onClick={() => handleChatQuestion(p.q, p.a)}
-                    className="bg-[#FFF9F0] hover:bg-[#FFC83D]/20 text-[#1D2A44] font-bold text-[10px] px-3 py-1.5 rounded-full border border-[#1D2A44]/5 transition-all inline-block shadow-soft-sm"
-                  >
-                    {p.q}
-                  </button>
-                ))}
-              </div>
-
-              {/* Input Form */}
-              <form onSubmit={handleSendChat} className="p-3 bg-white border-t border-[#1D2A44]/5 flex gap-2">
-                <input
-                  type="text"
-                  value={userInput}
-                  onChange={(e) => setUserInput(e.target.value)}
-                  placeholder="Ask about diet, vets, grooming..."
-                  className="flex-grow bg-[#FFF9F0] border border-[#1D2A44]/5 rounded-full px-4 py-2 text-xs focus:outline-none text-[#1D2A44]"
-                />
-                <button
-                  type="submit"
-                  className="bg-[#1D2A44] hover:bg-[#FFC83D] hover:text-[#1D2A44] text-white p-2.5 rounded-full transition-colors flex items-center justify-center shadow-soft-sm"
-                >
-                  <Send size={14} />
-                </button>
-              </form>
-            </motion.div>
-          )}
-        </AnimatePresence>
-
-        {/* Floating Chat Trigger Button */}
-        <button
-          onClick={() => setIsChatOpen(!isChatOpen)}
+        {/* Floating Chat Trigger Link */}
+        <a
+          href="https://ai.tailsnsmiles.com/"
+          target="_blank"
+          rel="noopener noreferrer"
           className="bg-[#1D2A44] hover:bg-[#FFC83D] hover:text-[#1D2A44] text-[#FFF9F0] p-4 rounded-full shadow-soft-lg flex items-center justify-center transform hover:scale-105 hover:-translate-y-0.5 transition-all duration-300 group border-2 border-white"
-          aria-label="Open AI Assistant Chatbot"
+          aria-label="Open AI Assistant Chat"
         >
           <MessageSquare size={24} className="group-hover:rotate-6 transition-transform" />
           <span className="max-w-0 overflow-hidden group-hover:max-w-xs group-hover:ml-2 font-bold text-xs tracking-wider transition-all duration-500 uppercase whitespace-nowrap">
             Tails AI Chat
           </span>
-        </button>
+        </a>
       </div>
 
     </div>
