@@ -1,0 +1,52 @@
+name: Deploy to Staging Server
+
+on:
+  push:
+    branches:
+      - main  # triggers on every push to main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      # SAFE: rsync ONLY writes to /var/www/tailsnsmiles/dist/
+      # --delete removes old build files inside dist/ only, never touches other projects
+      - name: Deploy dist/ to server via rsync
+        uses: burnett01/rsync-deployments@7.0.1
+        with:
+          switches: -avzr --delete
+          path: dist/
+          remote_path: /var/www/tailsnsmiles/dist/
+          remote_host: ${{ secrets.SSH_HOST }}
+          remote_user: ${{ secrets.SSH_USER }}
+          remote_key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      # SAFE: only restarts the "tailsnsmiles" PM2 process by name
+      # Other PM2 processes (elfphy, pet_frontend, etc.) are NOT touched
+      - name: Restart tailsnsmiles app only (PM2)
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            cd /var/www/tailsnsmiles
+            # Only restart the tailsnsmiles process — other projects stay untouched
+            pm2 restart tailsnsmiles 2>/dev/null || pm2 start server.js --name tailsnsmiles
+            pm2 save
