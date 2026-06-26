@@ -196,12 +196,15 @@ function App() {
       const hash = window.location.hash;
       if (hash === '#/terms' || hash === '#terms') {
         setCurrentPage('terms');
+        document.title = "Terms and Conditions | Tails 'n' Smiles";
         window.scrollTo({ top: 0, behavior: 'instant' });
       } else if (hash === '#/privacy' || hash === '#privacy') {
         setCurrentPage('privacy');
+        document.title = "Privacy Policy | Tails 'n' Smiles";
         window.scrollTo({ top: 0, behavior: 'instant' });
       } else {
         setCurrentPage('home');
+        document.title = "Tails 'n' Smiles – AI Powered Pet Care Ecosystem";
       }
     };
 
@@ -321,7 +324,7 @@ function App() {
             {currentPage === 'terms' ? (
               <>
                 <h1 className="font-display font-black text-3xl sm:text-4xl text-[#1D2A44] leading-tight">
-                  ELF Conditions of Use
+                  Terms and Conditions
                 </h1>
                 <p className="text-xs font-semibold text-[#FF7A00] uppercase tracking-wider">
                   Last Updated: June 2026
@@ -366,7 +369,7 @@ function App() {
             ) : (
               <>
                 <h1 className="font-display font-black text-3xl sm:text-4xl text-[#1D2A44] leading-tight">
-                  Privacy Notice
+                  Privacy Policy
                 </h1>
                 <p className="text-xs font-semibold text-[#FF7A00] uppercase tracking-wider">
                   Last Updated: June 2026
