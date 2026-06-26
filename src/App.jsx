@@ -19,6 +19,8 @@ import {
   MapPin,
   Search,
   ArrowRight,
+  ArrowLeft,
+  ArrowUp,
   Stethoscope,
   Brain,
   Clock,
@@ -29,7 +31,9 @@ import {
   VolumeX,
   Phone,
   Video,
-  Award
+  Award,
+  Globe,
+  Zap
 } from 'lucide-react';
 
 // Customized inline SVG of a stylized dog and cat for the Hero section
@@ -184,6 +188,39 @@ const RobotIllustration = () => (
 function App() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [selectedServiceTab, setSelectedServiceTab] = useState('Walkers');
+  const [currentPage, setCurrentPage] = useState('home');
+  const [showBackToTop, setShowBackToTop] = useState(false);
+
+  useEffect(() => {
+    const handleHashChange = () => {
+      const hash = window.location.hash;
+      if (hash === '#/terms' || hash === '#terms') {
+        setCurrentPage('terms');
+        window.scrollTo({ top: 0, behavior: 'instant' });
+      } else if (hash === '#/privacy' || hash === '#privacy') {
+        setCurrentPage('privacy');
+        window.scrollTo({ top: 0, behavior: 'instant' });
+      } else {
+        setCurrentPage('home');
+      }
+    };
+
+    handleHashChange();
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
+  }, []);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 300) {
+        setShowBackToTop(true);
+      } else {
+        setShowBackToTop(false);
+      }
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
   
   // States for interactive UI mockups
   const [heartRate, setHeartRate] = useState(78);
@@ -255,12 +292,117 @@ function App() {
     ? supplyProducts
     : supplyProducts.filter(p => p.category === selectedSupplyCategory);
 
+  if (currentPage === 'terms' || currentPage === 'privacy') {
+    return (
+      <div className="min-h-screen bg-[#FFF9F0] text-[#1D2A44] selection:bg-[#FFC83D] selection:text-[#1D2A44] flex flex-col relative">
+        {/* Navigation */}
+        <nav className="fixed top-0 left-0 right-0 z-50 bg-[#FFF9F0]/75 backdrop-blur-md border-b border-[#1D2A44]/5">
+          <div className="max-w-[1360px] mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#/" className="flex items-center group">
+              <Logo className="h-16 w-auto hover:scale-105 transition-transform duration-300" />
+            </a>
+            <a 
+              href="#/" 
+              className="inline-flex items-center gap-2 bg-[#1D2A44] text-[#FFF9F0] px-6 py-2.5 rounded-full font-bold text-sm hover:bg-[#FFC83D] hover:text-[#1D2A44] shadow-soft transform hover:-translate-y-0.5 transition-all duration-300 font-sans"
+            >
+              <ArrowLeft size={16} /> Back to Home
+            </a>
+          </div>
+        </nav>
+
+        {/* Content Container */}
+        <main className="flex-grow pt-32 pb-20 px-6 max-w-4xl mx-auto w-full">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="bg-white border border-[#1D2A44]/5 shadow-soft-lg p-8 sm:p-12 rounded-[32px] space-y-8"
+          >
+            {currentPage === 'terms' ? (
+              <>
+                <h1 className="font-display font-black text-3xl sm:text-4xl text-[#1D2A44] leading-tight">
+                  Terms and Conditions
+                </h1>
+                <p className="text-xs font-semibold text-[#FF7A00] uppercase tracking-wider">
+                  Last Updated: June 2026
+                </p>
+                <hr className="border-[#1D2A44]/10" />
+                <div className="prose max-w-none text-[#5C6B89] space-y-6 leading-relaxed">
+                  <p className="font-semibold text-[#1D2A44]">
+                    Welcome to Tails 'n' Smiles. By accessing or using our platform as a Pet Parent or Service Provider, you agree to be bound by these Conditions of Use.
+                  </p>
+                  <p>
+                    By registering on Tails 'n' Smiles, you agree to comply with all applicable laws and these terms. If you do not agree with any part of these terms, you may not use our services.
+                  </p>
+                  <p>
+                    Users may not submit false information, impersonate others, or engage in any fraudulent, abusive, or illegal activities on the platform.
+                  </p>
+                  <p>
+                    Tails 'n' Smiles acts solely as a platform to connect pet parents with service providers. We are not directly liable for the quality, safety, or legality of services provided by third-party professionals.
+                  </p>
+                </div>
+              </>
+            ) : (
+              <>
+                <h1 className="font-display font-black text-3xl sm:text-4xl text-[#1D2A44] leading-tight">
+                  Privacy Policy
+                </h1>
+                <p className="text-xs font-semibold text-[#FF7A00] uppercase tracking-wider">
+                  Last Updated: June 2026
+                </p>
+                <hr className="border-[#1D2A44]/10" />
+                <div className="prose max-w-none text-[#5C6B89] space-y-6 leading-relaxed">
+                  <p className="font-semibold text-[#1D2A44]">
+                    Welcome to Tails 'n' Smiles Privacy Notice. This notice explains how we collect, use, and protect your personal information when you use our platform.
+                  </p>
+                  <p>
+                    We collect information you provide directly to us when you register, including your name, email, phone number, and pet or business details. We may also collect technical data about your interaction with our website.
+                  </p>
+                  <p>
+                    We use your information to provide, maintain, and improve our services, communicate with you, process registrations, and personalize your experience on Tails 'n' Smiles. Your email and phone number are used strictly for account updates and related notifications.
+                  </p>
+                  <p>
+                    We do not sell your personal data to third parties. We implement industry-standard security measures to protect your information from unauthorized access, alteration, disclosure, or destruction.
+                  </p>
+                  <p>
+                    You have the right to access, update, or delete your personal information at any time by contacting our support team or accessing your account settings.
+                  </p>
+                </div>
+              </>
+            )}
+          </motion.div>
+        </main>
+
+        {/* Muted Footer */}
+        <footer className="py-8 text-center text-xs font-semibold text-[#5C6B89] border-t border-[#1D2A44]/5 bg-[#FFF9F0]">
+          <span>© 2026 Tails 'n' Smiles. All Rights Reserved.</span>
+        </footer>
+
+        {/* Back to top floating button */}
+        <AnimatePresence>
+          {showBackToTop && (
+            <motion.button
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.8 }}
+              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+              className="fixed bottom-24 right-6 z-50 bg-[#1D2A44] hover:bg-[#FFC83D] text-[#FFF9F0] hover:text-[#1D2A44] p-3.5 rounded-full shadow-soft-lg border-2 border-white cursor-pointer transition-all duration-300 flex items-center justify-center"
+              aria-label="Back to top"
+            >
+              <ArrowUp size={20} />
+            </motion.button>
+          )}
+        </AnimatePresence>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-[#FFF9F0] text-[#1D2A44] relative selection:bg-[#FFC83D] selection:text-[#1D2A44]">
       
       {/* GLASS NAVIGATION BAR */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-[#FFF9F0] border-b border-[#1D2A44]/5 md:bg-[#FFF9F0]/75 md:backdrop-blur-md">
-        <div className="max-w-7xl mx-auto px-6 py-3 md:py-4 flex justify-between items-center">
+        <div className="max-w-[1360px] mx-auto px-6 py-3 md:py-4 flex justify-between items-center">
           
           {/* Logo */}
           <a href="#hero" className="flex items-center group">
@@ -325,7 +467,7 @@ function App() {
       </nav>
 
       <header id="hero" className="pt-32 pb-10 md:pt-40 md:pb-12 px-6 overflow-hidden">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+        <div className="max-w-[1360px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
           
           {/* Left Hero Content */}
           <motion.div 
@@ -335,29 +477,32 @@ function App() {
             className="lg:col-span-7 space-y-4"
           >
             {/* Launching Soon Badge */}
-            <div className="inline-flex items-center gap-2 bg-[#FFC83D]/15 text-[#FF7A00] font-bold px-4 py-2 rounded-full border border-[#FFC83D]/25 shadow-soft-sm">
+            <div className="inline-flex items-center gap-2 bg-[#FFC83D]/15 text-[#FF7A00] font-bold text-sm px-4 py-2 rounded-full border border-[#FFC83D]/25 shadow-soft-sm">
               <span className="animate-bounce">🚀</span> Launching Soon
             </div>
 
             {/* Main Heading */}
-            <h1 className="font-display font-black text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-tight tracking-tight text-[#1D2A44]">
-              AI Powered <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF7A00] to-[#FFC83D]">
-                Pet Care Ecosystem
-              </span>
+            <h1 className="font-display font-black text-4xl sm:text-5xl lg:text-[56px] xl:text-[68px] leading-[1.1] tracking-tight text-[#1D2A44]">
+              Smarter care for <br />
+              every pet, AI-powered <br />
+              ecosystem
             </h1>
-
-            <p className="font-display font-medium text-2xl md:text-3xl text-[#2E3F5F]">
-              Everything your pet needs, <strong className="text-[#1D2A44] font-semibold">all in one place.</strong>
+ 
+            <p className="font-display font-bold text-xl md:text-2xl text-[#1D2A44]">
+              From reactive care to proactive pet care
             </p>
-
-            <div className="space-y-4">
-              <p className="text-lg leading-relaxed text-[#5C6B89] max-w-2xl">
-                Finding trusted vets, groomers, trainers, boarding services, pet supplies, and other care providers shouldn't require juggling multiple apps, websites, and phone calls.
+ 
+            <div className="space-y-4 text-base md:text-lg text-[#5C6B89] leading-relaxed max-w-2xl">
+              <p>
+                Tails 'n' Smiles connects vets, grooming, training, boarding, supplies, and real-time health data into one AI-powered system — so every part of pet care works together, not in isolation.
               </p>
               
-              <p className="text-lg leading-relaxed text-[#5C6B89] max-w-2xl">
-                Tails 'n' Smiles brings the entire pet care ecosystem together into a single intelligent platform, making it easier for pet parents to discover, book, manage, and track everything their pets need.
+              <p>
+                Instead of fragmented apps, disconnected providers, and delayed decisions, pet parents get a single intelligent layer that understands their pet over time and helps prevent problems before they happen.
+              </p>
+              
+              <p className="font-bold text-[#1D2A44]">
+                One system. Continuous intelligence. Better care for every pet.
               </p>
             </div>
 
@@ -471,57 +616,57 @@ function App() {
 
       {/* FEATURES SECTION */}
       <section id="features" className="py-14 md:py-16 px-6 bg-[#FFF9F0]">
-        <div className="max-w-7xl mx-auto space-y-16">
+        <div className="max-w-[1360px] mx-auto space-y-16">
 
           {/* Section Heading */}
           <div className="text-center max-w-3xl mx-auto space-y-4">
             <span className="font-bold text-[#FF7A00] tracking-wider uppercase text-sm">Features</span>
             <h2 className="font-display font-extrabold text-4xl md:text-5xl tracking-tight text-[#1D2A44]">
-              Intelligent Pet Care, Simplified
+              Intelligent Pet Care, Unified by AI
             </h2>
             <p className="text-[#5C6B89] text-lg">
-              Everything your pet needs — health, grooming, supplies, and expert care — all in one place.
+              A connected system that learns, predicts, and acts across your pet’s entire care journey.
             </p>
           </div>
-
+ 
           {/* 6-card simple grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
               {
                 icon: <Stethoscope size={24} />,
                 bg: "bg-red-50 text-red-500",
-                title: "AI Vet Consultation",
-                desc: "Get instant expert advice from certified vets via chat or video call, 24/7 from anywhere."
+                title: "AI Vet Intelligence",
+                desc: "Instantly analyze symptoms and behavior with AI-assisted vet guidance — helping you decide whether to monitor, visit a clinic, or act urgently."
               },
               {
                 icon: <Activity size={24} />,
                 bg: "bg-orange-50 text-orange-500",
-                title: "Smart Health Monitoring",
-                desc: "Track activity, heart rate, sleep, and vitals in real-time using the smart collar and app dashboard."
+                title: "Continuous Health Understanding",
+                desc: "A living health profile built from activity, sleep, vitals, and behavior — detecting early risk patterns before visible symptoms appear."
               },
               {
                 icon: <Scissors size={24} />,
                 bg: "bg-blue-50 text-blue-500",
-                title: "Grooming Made Easy",
-                desc: "Book verified groomers for baths, haircuts, nail trims and spa treatments â€” at home or nearby."
+                title: "Verified On-Demand Care Network",
+                desc: "Book trusted groomers, trainers, and care providers instantly — at home or nearby, with verified quality and transparency."
               },
               {
                 icon: <ShoppingBag size={24} />,
                 bg: "bg-green-50 text-green-500",
-                title: "Pet Supplies Delivered",
-                desc: "Shop curated food, toys, accessories and medicines with fast doorstep delivery."
+                title: "Smart Supply & Care Delivery",
+                desc: "Access curated pet food, medicine, and essentials — matched to your pet’s profile and delivered when needed."
               },
               {
                 icon: <Home size={24} />,
                 bg: "bg-purple-50 text-purple-500",
-                title: "Boarding & Daycare",
-                desc: "Find trusted boarding homes and daycare centers with live updates while you're away."
+                title: "Trusted Boarding Intelligence",
+                desc: "Find safe, verified boarding and daycare options with real-time updates and provider transparency."
               },
               {
                 icon: <Brain size={24} />,
                 bg: "bg-[#FFC83D]/20 text-[#FF7A00]",
-                title: "AI Pet Assistant",
-                desc: "Get smart reminders, personalized care tips, and proactive health recommendations powered by AI."
+                title: "Personal AI Pet Companion",
+                desc: "A continuously learning AI system that adapts to your pet’s history and behavior — sending proactive alerts, reminders, and care suggestions."
               }
             ].map((feature) => (
               <motion.div
@@ -547,63 +692,63 @@ function App() {
 
       {/* WHY TAILS 'N' SMILES SECTION */}
       <section id="why-us" className="py-14 md:py-16 px-6 bg-[#FFF9F0] border-t border-[#1D2A44]/5">
-        <div className="max-w-7xl mx-auto space-y-16">
+        <div className="max-w-[1360px] mx-auto space-y-16">
           
           {/* Section Heading */}
           <div className="text-center max-w-3xl mx-auto space-y-4">
             <span className="font-bold text-[#FF7A00] tracking-wider uppercase text-sm">Why Tails 'n' Smiles</span>
-            <h2 className="font-display font-extrabold text-4xl md:text-5xl tracking-tight text-[#1D2A44]">
-              Built with Love & Powered by Intelligence
+            <h2 className="font-display font-extrabold text-4xl md:text-5xl tracking-tight text-[#1D2A44] leading-tight">
+              We are building the infrastructure <br className="hidden md:inline" /> layer that connects the entire pet <br className="hidden md:inline" /> care ecosystem.
             </h2>
-            <p className="text-[#5C6B89] text-lg">
-              Here is why pet parents are switching to Tails 'n' Smiles.
+            <p className="text-[#5C6B89] text-lg font-medium">
+              Not another marketplace. Not another pet app.
             </p>
           </div>
-
+ 
           {/* 4 Premium Cards Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             
-            {/* Card 1: Trusted Experts */}
+            {/* Card 1: AI That Learns Every Pet Over Time */}
             <div className="bg-white p-8 rounded-3xl border border-[#1D2A44]/5 shadow-soft hover:shadow-soft-lg transform hover:-translate-y-1 transition-all duration-300 space-y-5">
               <div className="bg-orange-100 text-orange-500 w-12 h-12 rounded-2xl flex items-center justify-center shadow-soft-sm">
                 <ShieldCheck size={24} />
               </div>
-              <h3 className="font-display font-extrabold text-xl text-[#1D2A44]">Trusted Experts</h3>
+              <h3 className="font-display font-extrabold text-xl text-[#1D2A44]">AI That Learns Every Pet Over Time</h3>
               <p className="text-base text-[#5C6B89] leading-relaxed">
-                Every veterinarian, groomer, and dog trainer on our ecosystem undergoes screening and credential verification.
+                We build a continuous behavioral + health intelligence model for each pet, enabling predictive care instead of reactive treatment.
               </p>
             </div>
-
-            {/* Card 2: AI Powered Insights */}
+ 
+            {/* Card 2: Trust-First Verified Network */}
             <div className="bg-white p-8 rounded-3xl border border-[#1D2A44]/5 shadow-soft hover:shadow-soft-lg transform hover:-translate-y-1 transition-all duration-300 space-y-5">
               <div className="bg-red-100 text-red-500 w-12 h-12 rounded-2xl flex items-center justify-center shadow-soft-sm">
                 <Brain size={24} />
               </div>
-              <h3 className="font-display font-extrabold text-xl text-[#1D2A44]">AI Powered Insights</h3>
+              <h3 className="font-display font-extrabold text-xl text-[#1D2A44]">Trust-First Verified Network</h3>
               <p className="text-base text-[#5C6B89] leading-relaxed">
-                Smart recommendations tailored specifically to your pet's breed characteristics, age, wellness trends, and history.
+                Every provider is verified to ensure safety, consistency, and quality across all services.
               </p>
             </div>
-
-            {/* Card 3: Complete Ecosystem */}
+ 
+            {/* Card 3: Unified Care Infrastructure */}
             <div className="bg-white p-8 rounded-3xl border border-[#1D2A44]/5 shadow-soft hover:shadow-soft-lg transform hover:-translate-y-1 transition-all duration-300 space-y-5">
               <div className="bg-green-100 text-green-500 w-12 h-12 rounded-2xl flex items-center justify-center shadow-soft-sm">
                 <ShoppingBag size={24} />
               </div>
-              <h3 className="font-display font-extrabold text-xl text-[#1D2A44]">Complete Ecosystem</h3>
+              <h3 className="font-display font-extrabold text-xl text-[#1D2A44]">Unified Care Infrastructure</h3>
               <p className="text-base text-[#5C6B89] leading-relaxed">
-                Everything under one umbrellaâ€”from urgent medical support to custom treats, and styling services.
+                Health data, services, and providers are not separate systems — they are connected into one intelligent network.
               </p>
             </div>
-
-            {/* Card 4: Convenience */}
+ 
+            {/* Card 4: Zero-Friction Experience Layer */}
             <div className="bg-white p-8 rounded-3xl border border-[#1D2A44]/5 shadow-soft hover:shadow-soft-lg transform hover:-translate-y-1 transition-all duration-300 space-y-5">
               <div className="bg-blue-100 text-blue-500 w-12 h-12 rounded-2xl flex items-center justify-center shadow-soft-sm">
                 <Clock size={24} />
               </div>
-              <h3 className="font-display font-extrabold text-xl text-[#1D2A44]">Convenience</h3>
+              <h3 className="font-display font-extrabold text-xl text-[#1D2A44]">Zero-Friction Experience Layer</h3>
               <p className="text-base text-[#5C6B89] leading-relaxed">
-                One platform, one login, and one card on file to replace a dozen apps, bookmarks, and phone contacts.
+                One account, one system, one payment flow — removing fragmentation across pet care services.
               </p>
             </div>
 
@@ -612,41 +757,56 @@ function App() {
         </div>
       </section>
 
-      {/* PET PARENT BENEFITS SECTION */}
+      {/* BENEFITS SECTION */}
       <section id="benefits" className="py-14 md:py-16 px-6 bg-[#FFF9F0] border-t border-[#1D2A44]/5">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+        <div className="max-w-[1360px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
           
           {/* Left Column: Heading and checklist */}
           <div className="lg:col-span-6 space-y-8">
             <div className="space-y-4">
-              <span className="font-bold text-[#FF7A00] tracking-wider uppercase text-sm">Parent Benefits</span>
-              <h2 className="font-display font-extrabold text-4xl md:text-5xl tracking-tight text-[#1D2A44]">
-                Built for Modern Pet Parents
+              <span className="font-bold text-[#FF7A00] tracking-wider uppercase text-sm">PARENT BENEFITS</span>
+              <h2 className="font-display font-extrabold text-4xl md:text-5xl leading-tight text-[#1D2A44]">
+                Built for the Entire Pet Care Ecosystem
               </h2>
-              <p className="text-[#5C6B89] text-lg">
-                Gain tools designed to make pet health proactive rather than reactive, while saving you time.
+              <p className="text-[#5C6B89] text-lg leading-relaxed">
+                From pet parents to service providers — shifting the industry from fragmented to connected intelligence.
               </p>
             </div>
 
-            {/* Benefits Checklist */}
+            {/* Benefits Checklist in 2 columns */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {[
-                "Save Time",
-                "Trusted Providers",
-                "Centralized Pet Records",
-                "Smart Health Tracking",
-                "Instant Bookings",
-                "Personalized Care",
-                "Automated Reminders",
-                "Better Pet Wellbeing"
-              ].map((benefit) => (
-                <div key={benefit} className="flex items-center gap-3 bg-white p-4 rounded-2xl border border-[#1D2A44]/5 shadow-soft-sm">
-                  <div className="bg-teal-500 text-white p-1 rounded-full flex items-center justify-center">
-                    <Check size={14} strokeWidth={3} />
+              {/* Left Column (Parent Benefits) */}
+              <div className="space-y-3.5">
+                {[
+                  "Manage all pet care in one system",
+                  "Get AI insights and early health alerts",
+                  "Book verified vets and services instantly",
+                  "Keep a lifelong pet health record"
+                ].map((benefit) => (
+                  <div key={benefit} className="flex items-center gap-3 bg-white p-4 px-6 rounded-full border border-[#1D2A44]/5 shadow-soft-sm hover:scale-[1.02] hover:shadow-soft transition-all duration-300">
+                    <div className="bg-[#00B686] text-white p-1 rounded-full flex items-center justify-center shrink-0">
+                      <Check size={14} strokeWidth={3} />
+                    </div>
+                    <span className="font-bold text-sm text-[#1D2A44] leading-snug">{benefit}</span>
                   </div>
-                  <span className="font-bold text-sm text-[#1D2A44]">{benefit}</span>
-                </div>
-              ))}
+                ))}
+              </div>
+              {/* Right Column (Provider Benefits) */}
+              <div className="space-y-3.5">
+                {[
+                  "Get discovered by local pet parents",
+                  "Increase bookings through one platform",
+                  "Manage clients and schedules easily",
+                  "Build trust with verified profiles"
+                ].map((benefit) => (
+                  <div key={benefit} className="flex items-center gap-3 bg-white p-4 px-6 rounded-full border border-[#1D2A44]/5 shadow-soft-sm hover:scale-[1.02] hover:shadow-soft transition-all duration-300">
+                    <div className="bg-[#00B686] text-white p-1 rounded-full flex items-center justify-center shrink-0">
+                      <Check size={14} strokeWidth={3} />
+                    </div>
+                    <span className="font-bold text-sm text-[#1D2A44] leading-snug">{benefit}</span>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
 
@@ -723,63 +883,67 @@ function App() {
         <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-orange-400/10 rounded-full blur-3xl pointer-events-none"></div>
         <div className="absolute bottom-0 left-0 w-[300px] h-[300px] bg-teal-400/5 rounded-full blur-2xl pointer-events-none"></div>
         
-        <div className="max-w-4xl mx-auto text-center space-y-8 relative z-10">
+        <div className="max-w-[1360px] xl:max-w-[1420px] 2xl:max-w-[1550px] mx-auto text-center space-y-8 relative z-10">
           
           <div className="space-y-4">
-            <span className="font-bold text-[#FFC83D] tracking-wider uppercase text-sm">Join the ecosystem</span>
-            <h2 className="font-display font-extrabold text-4xl md:text-5xl tracking-tight text-[#FFF9F0]">
-              Be Among the First Pet Parents
+            <span className="font-bold text-[#FFC83D] tracking-wider uppercase text-xs sm:text-sm">JOIN THE FUTURE OF PET CARE INTELLIGENCE</span>
+            <h2 className="font-display font-extrabold text-3xl sm:text-4xl md:text-[40px] lg:text-[44px] xl:text-[50px] 2xl:text-[58px] leading-tight tracking-tighter text-[#FFF9F0] max-w-[1300px] xl:max-w-[1380px] 2xl:max-w-[1500px] mx-auto">
+              Be among the first pet parents and service providers shaping the <br className="hidden lg:inline" /> first AI-powered pet care system.
             </h2>
-            <p className="text-[#E5DEC9] text-lg max-w-xl mx-auto">
-              Join our community of pet parents and get early access to the future of pet care. Special launch benefits inside.
+            <p className="text-[#E5DEC9] text-base md:text-lg max-w-2xl mx-auto font-medium leading-relaxed opacity-95">
+              This is not just early access — it’s participation in building the future of connected pet care.
             </p>
           </div>
-
+ 
           {/* Join CTA & QR Code Container */}
           <div className="flex flex-col md:flex-row items-center justify-center gap-8 max-w-2xl mx-auto bg-white/5 backdrop-blur-md p-6 sm:p-8 rounded-3xl border border-white/10 shadow-lg">
             
-            {/* Left: Button */}
-            <div className="flex flex-col items-center md:items-start text-center md:text-left gap-4">
-              <h3 className="font-display font-bold text-xl text-[#FFF9F0]">Access the Community Portal</h3>
+            {/* Left: Button & Description */}
+            <div className="flex flex-col items-center md:items-start text-center md:text-left gap-4 flex-1">
+              <h3 className="font-display font-bold text-xl text-[#FFF9F0]">Early Access Community</h3>
               <p className="text-sm text-[#E5DEC9] max-w-xs leading-relaxed">
-                Click the button below to join the community space immediately on your desktop or browser.
+                Join the private ecosystem and get direct access to product evolution.
               </p>
               <a 
                 href="https://join.tailsnsmiles.com/pet-parent" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 bg-[#FFC83D] text-[#1D2A44] px-8 py-4 rounded-full font-bold text-base hover:bg-[#FFF9F0] hover:scale-105 shadow-soft transition-all duration-300 whitespace-nowrap"
+                className="inline-flex items-center gap-2 bg-[#FFC83D] text-[#1D2A44] px-6 py-3.5 rounded-full font-bold text-sm hover:bg-[#FFF9F0] hover:scale-105 shadow-soft transition-all duration-300 whitespace-nowrap"
               >
-                Join Community <ArrowRight size={18} />
+                Join Community <ArrowRight size={16} />
               </a>
             </div>
-
+ 
+            {/* Vertical Divider */}
+            <div className="hidden md:block w-px h-36 bg-white/10"></div>
+ 
             {/* Right: QR Code */}
-            <div className="flex flex-col items-center gap-4 border-t md:border-t-0 md:border-l border-white/10 pt-6 md:pt-0 md:pl-8">
-              <div className="bg-white p-4 rounded-3xl shadow-soft">
+            <div className="flex flex-col items-center gap-3 pt-6 md:pt-0">
+              <div className="bg-white p-2 rounded-none shadow-soft">
                 <img 
                   src={qrCodeSvg} 
                   alt="QR Code to Join Community" 
-                  className="w-38 h-38 object-contain"
+                  className="w-44 h-44 object-contain rounded-none"
                 />
               </div>
-              <span className="text-xs font-bold text-[#E5DEC9] tracking-wide uppercase">Scan to join on mobile</span>
+              <span className="text-[11px] font-bold text-[#E5DEC9] tracking-wider uppercase">SCAN TO JOIN ON MOBILE</span>
             </div>
-
+ 
           </div>
-
-          {/* Included Features */}
-          <div className="flex flex-wrap justify-center items-center gap-8 pt-4">
+ 
+          {/* Included Features / Bullet Points */}
+          <div className="flex flex-wrap md:flex-nowrap justify-center items-center gap-x-4 lg:gap-x-8 gap-y-4 pt-6 text-left border-t border-white/5">
             {[
-              "Early Access",
-              "Exclusive Updates",
-              "Product Launch Notifications"
+              "Early feature releases before public launch",
+              "Founding community access",
+              "Priority onboarding during rollout",
+              "Direct feedback loop with the team"
             ].map(inc => (
-              <div key={inc} className="flex items-center gap-2 font-semibold text-sm text-[#E5DEC9]">
-                <div className="bg-[#FFC83D] text-[#1D2A44] p-0.5 rounded-full flex items-center justify-center">
+              <div key={inc} className="flex items-center gap-2 font-semibold text-[11px] sm:text-xs lg:text-sm text-[#E5DEC9] whitespace-nowrap">
+                <div className="bg-[#FFC83D] text-[#1D2A44] p-0.5 rounded-full flex items-center justify-center shrink-0">
                   <Check size={12} strokeWidth={3} />
                 </div>
-                {inc}
+                <span>{inc}</span>
               </div>
             ))}
           </div>
@@ -789,14 +953,14 @@ function App() {
 
       {/* FOOTER */}
       <footer className="bg-[#FFF9F0] text-[#1D2A44] pt-10 pb-6 px-6 border-t border-[#1D2A44]/5">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-32 border-b border-[#1D2A44]/10 pb-10 mb-4">
+        <div className="max-w-[1360px] mx-auto grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-32 border-b border-[#1D2A44]/10 pb-10 mb-4">
           
           {/* Logo and Tagline */}
           <div className="md:col-span-4 space-y-4">
             <a href="#hero" className="inline-block group">
               <Logo className="h-20 w-auto hover:scale-105 transition-transform duration-300" />
             </a>
-            <p className="text-[#5C6B89] leading-relaxed max-w-sm">
+            <p className="text-base text-[#5C6B89] leading-relaxed max-w-sm">
               Everything your pet needs, all in one place. Bringing veterinary guidance, supplies, styling, and monitoring together.
             </p>
           </div>
@@ -813,8 +977,8 @@ function App() {
             <div className="space-y-4">
               <h4 className="font-display font-bold text-sm tracking-wider uppercase text-[#1D2A44]">Company</h4>
               <ul className="space-y-2.5 text-sm font-semibold text-[#5C6B89]">
-                <li><a href="#" className="hover:text-[#1D2A44] transition-colors whitespace-nowrap">Privacy Policy</a></li>
-                <li><a href="#" className="hover:text-[#1D2A44] transition-colors whitespace-nowrap">Terms and Conditions</a></li>
+                <li><a href="#/privacy" className="hover:text-[#1D2A44] transition-colors whitespace-nowrap">Privacy Policy</a></li>
+                <li><a href="#/terms" className="hover:text-[#1D2A44] transition-colors whitespace-nowrap">Terms and Conditions</a></li>
               </ul>
             </div>
           </div>
@@ -901,7 +1065,7 @@ function App() {
         </div>
 
         {/* Copyright */}
-        <div className="max-w-7xl mx-auto flex justify-center items-center text-xs font-semibold text-[#5C6B89] gap-4 text-center">
+        <div className="max-w-[1360px] mx-auto flex justify-center items-center text-xs font-semibold text-[#5C6B89] gap-4 text-center">
           <span>© 2026 Tails 'n' Smiles. All Rights Reserved.</span>
         </div>
       </footer>
@@ -922,6 +1086,22 @@ function App() {
           </span>
         </a>
       </div>
+
+      {/* Floating Back to top button */}
+      <AnimatePresence>
+        {showBackToTop && (
+          <motion.button
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.8 }}
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            className="fixed bottom-24 right-6 z-50 bg-[#1D2A44] hover:bg-[#FFC83D] text-[#FFF9F0] hover:text-[#1D2A44] p-3.5 rounded-full shadow-soft-lg border-2 border-white cursor-pointer transition-all duration-300 flex items-center justify-center"
+            aria-label="Back to top"
+          >
+            <ArrowUp size={20} />
+          </motion.button>
+        )}
+      </AnimatePresence>
 
     </div>
   );
