@@ -321,7 +321,7 @@ function App() {
             {currentPage === 'terms' ? (
               <>
                 <h1 className="font-display font-black text-3xl sm:text-4xl text-[#1D2A44] leading-tight">
-                  Terms and Conditions
+                  ELF Conditions of Use
                 </h1>
                 <p className="text-xs font-semibold text-[#FF7A00] uppercase tracking-wider">
                   Last Updated: June 2026
@@ -329,23 +329,44 @@ function App() {
                 <hr className="border-[#1D2A44]/10" />
                 <div className="prose max-w-none text-[#5C6B89] space-y-6 leading-relaxed">
                   <p className="font-semibold text-[#1D2A44]">
-                    Welcome to Tails 'n' Smiles. By accessing or using our platform as a Pet Parent or Service Provider, you agree to be bound by these Conditions of Use.
+                    Welcome to The ELF Store. By accessing or using our platform as a Pet Parent or Service Provider, you agree to be bound by these Conditions of Use.
                   </p>
-                  <p>
-                    By registering on Tails 'n' Smiles, you agree to comply with all applicable laws and these terms. If you do not agree with any part of these terms, you may not use our services.
-                  </p>
-                  <p>
-                    Users may not submit false information, impersonate others, or engage in any fraudulent, abusive, or illegal activities on the platform.
-                  </p>
-                  <p>
-                    Tails 'n' Smiles acts solely as a platform to connect pet parents with service providers. We are not directly liable for the quality, safety, or legality of services provided by third-party professionals.
-                  </p>
+                  
+                  <div className="space-y-4 pt-2">
+                    <div>
+                      <h3 className="font-display font-bold text-lg text-[#1D2A44] mb-1">1. Acceptance of Terms</h3>
+                      <p>
+                        By registering on The ELF Store, you agree to comply with all applicable laws and these terms. If you do not agree with any part of these terms, you may not use our services.
+                      </p>
+                    </div>
+
+                    <div>
+                      <h3 className="font-display font-bold text-lg text-[#1D2A44] mb-1">2. User Responsibilities</h3>
+                      <p>
+                        You are responsible for maintaining the confidentiality of your account credentials and for all activities under your account. Service Providers must ensure that all services offered meet standard professional and legal requirements in their jurisdiction.
+                      </p>
+                    </div>
+
+                    <div>
+                      <h3 className="font-display font-bold text-lg text-[#1D2A44] mb-1">3. Prohibited Activities</h3>
+                      <p>
+                        Users may not submit false information, impersonate others, or engage in any fraudulent, abusive, or illegal activities on the platform.
+                      </p>
+                    </div>
+
+                    <div>
+                      <h3 className="font-display font-bold text-lg text-[#1D2A44] mb-1">4. Limitation of Liability</h3>
+                      <p>
+                        The ELF Store acts solely as a platform to connect pet parents with service providers. We are not directly liable for the quality, safety, or legality of services provided by third-party professionals.
+                      </p>
+                    </div>
+                  </div>
                 </div>
               </>
             ) : (
               <>
                 <h1 className="font-display font-black text-3xl sm:text-4xl text-[#1D2A44] leading-tight">
-                  Privacy Policy
+                  Privacy Notice
                 </h1>
                 <p className="text-xs font-semibold text-[#FF7A00] uppercase tracking-wider">
                   Last Updated: June 2026
@@ -353,20 +374,38 @@ function App() {
                 <hr className="border-[#1D2A44]/10" />
                 <div className="prose max-w-none text-[#5C6B89] space-y-6 leading-relaxed">
                   <p className="font-semibold text-[#1D2A44]">
-                    Welcome to Tails 'n' Smiles Privacy Notice. This notice explains how we collect, use, and protect your personal information when you use our platform.
+                    Welcome to The ELF Store Privacy Notice. This notice explains how we collect, use, and protect your personal information when you use our platform.
                   </p>
-                  <p>
-                    We collect information you provide directly to us when you register, including your name, email, phone number, and pet or business details. We may also collect technical data about your interaction with our website.
-                  </p>
-                  <p>
-                    We use your information to provide, maintain, and improve our services, communicate with you, process registrations, and personalize your experience on Tails 'n' Smiles. Your email and phone number are used strictly for account updates and related notifications.
-                  </p>
-                  <p>
-                    We do not sell your personal data to third parties. We implement industry-standard security measures to protect your information from unauthorized access, alteration, disclosure, or destruction.
-                  </p>
-                  <p>
-                    You have the right to access, update, or delete your personal information at any time by contacting our support team or accessing your account settings.
-                  </p>
+                  
+                  <div className="space-y-4 pt-2">
+                    <div>
+                      <h3 className="font-display font-bold text-lg text-[#1D2A44] mb-1">1. Information We Collect</h3>
+                      <p>
+                        We collect information you provide directly to us when you register, including your name, email, phone number, and pet or business details. We may also collect technical data about your interaction with our website.
+                      </p>
+                    </div>
+
+                    <div>
+                      <h3 className="font-display font-bold text-lg text-[#1D2A44] mb-1">2. How We Use Information</h3>
+                      <p>
+                        We use your information to provide, maintain, and improve our services, communicate with you, process registrations, and personalize your experience on The ELF Store. Your email and phone number are used strictly for account updates and related notifications.
+                      </p>
+                    </div>
+
+                    <div>
+                      <h3 className="font-display font-bold text-lg text-[#1D2A44] mb-1">3. Data Sharing and Security</h3>
+                      <p>
+                        We do not sell your personal data to third parties. We implement industry-standard security measures to protect your information from unauthorized access, alteration, disclosure, or destruction.
+                      </p>
+                    </div>
+
+                    <div>
+                      <h3 className="font-display font-bold text-lg text-[#1D2A44] mb-1">4. Your Rights</h3>
+                      <p>
+                        You have the right to access, update, or delete your personal information at any time by contacting our support team or accessing your account settings.
+                      </p>
+                    </div>
+                  </div>
                 </div>
               </>
             )}
