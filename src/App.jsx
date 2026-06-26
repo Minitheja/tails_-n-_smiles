@@ -1016,8 +1016,8 @@ function App() {
             <div className="space-y-4">
               <h4 className="font-display font-bold text-sm tracking-wider uppercase text-[#1D2A44]">Company</h4>
               <ul className="space-y-2.5 text-sm font-semibold text-[#5C6B89]">
-                <li><a href="#/privacy" className="hover:text-[#1D2A44] transition-colors whitespace-nowrap">Privacy Policy</a></li>
-                <li><a href="#/terms" className="hover:text-[#1D2A44] transition-colors whitespace-nowrap">Terms and Conditions</a></li>
+                <li><a href="#/privacy" target="_blank" rel="noopener noreferrer" className="hover:text-[#1D2A44] transition-colors whitespace-nowrap">Privacy Policy</a></li>
+                <li><a href="#/terms" target="_blank" rel="noopener noreferrer" className="hover:text-[#1D2A44] transition-colors whitespace-nowrap">Terms and Conditions</a></li>
               </ul>
             </div>
           </div>
